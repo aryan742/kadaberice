@@ -1,0 +1,33 @@
+# Ignore any compiled files or caches
+.cache/
+*.o
+*.so
+*.a
+__pycache__/
+*.pyc
+
+# Ignore Neovim temp / undo / swap files
+.netrwhist
+*.swp
+*.swo
+*~
+
+# Ignore package manager local directories
+node_modules/
+.npm/
+
+# STRICT PRIVACY & SECURITY RULES (SSH / Keys / Tokens)
+# We do not commit private keys, known hosts, or credentials!
+**/*id_rsa*
+**/*id_ed25519*
+**/*id_ecdsa*
+**/*id_dsa*
+**/known_hosts*
+**/authorized_keys
+**/*.pem
+**/*.key
+.env
+*.env
+credentials
+passwd
+*token*
