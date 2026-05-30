@@ -1,0 +1,109 @@
+/* AryanOS AGS Styling */
+
+* {
+    font-family: "JetBrains Mono Nerd Font", "Noto Sans Devanagari", sans-serif;
+    color: #F5F0E6; /* Soft white/Ivory */
+}
+
+/* Glassmorphism base for windows */
+window {
+    background-color: transparent;
+}
+
+.window-content {
+    background-color: rgba(17, 17, 17, 0.65); /* Blur backend handled by Hyprland */
+    border: 2px solid rgba(217, 119, 6, 0.4); /* Muted saffron accent border */
+    border-radius: 16px;
+    padding: 24px;
+}
+
+/* App Launcher Carousel */
+.app-launcher .search-entry {
+    background-color: rgba(26, 26, 26, 0.8);
+    border: 1px solid rgba(112, 128, 144, 0.5); /* Slate blue tint */
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 20px;
+    margin-bottom: 24px;
+}
+
+.app-launcher .search-entry:focus {
+    border-color: rgba(217, 119, 6, 0.8);
+}
+
+.carousel-container {
+    padding: 10px;
+}
+
+.app-card {
+    background-color: rgba(26, 26, 26, 0.5);
+    border-radius: 12px;
+    padding: 16px;
+    margin: 0 8px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.app-card.active {
+    background-color: rgba(112, 128, 144, 0.4); /* Slate blue highlight */
+    border: 1px solid rgba(217, 119, 6, 0.9);
+    padding: 32px;
+    min-width: 200px;
+    min-height: 200px;
+}
+
+.app-card .icon {
+    font-size: 64px;
+}
+
+.app-card.active .icon {
+    font-size: 128px;
+}
+
+.app-card .title {
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 12px;
+}
+
+.app-card.active .title {
+    font-size: 24px;
+}
+
+/* Workspace Carousel */
+.workspace-card {
+    background-color: rgba(26, 26, 26, 0.5);
+    border-radius: 12px;
+    margin: 0 12px;
+    padding: 12px;
+    transition: all 0.3s ease;
+}
+
+.workspace-card.active {
+    background-color: rgba(217, 119, 6, 0.2);
+    border: 2px solid rgba(217, 119, 6, 0.9);
+    padding: 24px;
+}
+
+.workspace-name {
+    font-size: 24px;
+    font-weight: bold;
+    color: #F5F0E6;
+}
+
+.workspace-card.active .workspace-name {
+    font-size: 48px;
+    color: #D4AF37; /* Gold/Saffron */
+}
+
+/* Wallpaper Carousel */
+.wallpaper-card {
+    border-radius: 12px;
+    margin: 0 8px;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.wallpaper-card.active {
+    border: 2px solid rgba(217, 119, 6, 1.0);
+    padding: 4px;
+}
