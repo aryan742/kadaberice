@@ -3,32 +3,55 @@
 -- ─────────────────────────────────────────────────────────────────────────────
 
 return {
-  -- ── Colorscheme: TokyoNight ────────────────────────────────────────────────
+  -- ── Colorscheme: Catppuccin (Ancient Manuscript Override) ──────────────────
   {
-    "folke/tokyonight.nvim",
-    lazy    = false,
+    "catppuccin/nvim",
+    name     = "catppuccin",
+    lazy     = false,
     priority = 1000,
     opts = {
-      style        = "night",    -- night | storm | moon | day
-      transparent  = false,
-      terminal_colors = true,
-      styles = {
-        comments   = { italic = true },
-        keywords   = { italic = true },
-        functions  = {},
-        variables  = {},
-        sidebars   = "dark",
-        floats     = "dark",
+      flavour             = "mocha", -- base theme
+      transparent_background = false,
+      color_overrides = {
+        mocha = {
+          base      = "#111111", -- Deep Dark Background
+          mantle    = "#0e0e0e",
+          crust     = "#0a0a0a",
+          text      = "#F5F0E6", -- Ivory text
+          subtext1  = "#E5DEC9",
+          subtext0  = "#D5CDB2",
+          overlay2  = "#BFA67A",
+          overlay1  = "#A08A63",
+          overlay0  = "#806E4D", -- Parchment / manuscript brown comments
+          surface2  = "#3a3a3a",
+          surface1  = "#2a2a2a",
+          surface0  = "#1c1c1c",
+          
+          -- Custom accent maps:
+          red       = "#7F1D1D", -- Crimson
+          peach     = "#D97706", -- Saffron String Accent
+          yellow    = "#D4AF37", -- Gold
+          blue      = "#3B82F6", -- Shiva Blue
+          green     = "#A3E635",
+          teal      = "#0D9488",
+          sky       = "#38BDF8",
+          sapphire  = "#2563EB",
+          lavender  = "#818CF8",
+          mauve     = "#D97706", -- Saffron Keywords
+        },
       },
-      sidebars         = { "qf", "help", "neo-tree", "Trouble", "lazy", "mason" },
-      day_brightness   = 0.3,
-      hide_inactive_statusline = false,
-      dim_inactive     = false,
-      lualine_bold     = true,
+      custom_highlights = function(colors)
+        return {
+          Comment = { fg = "#8A7D63", style = { "italic" } }, -- Parchment
+          LineNr = { fg = "#5A503C" },
+          CursorLineNr = { fg = "#D4AF37", style = { "bold" } }, -- Gold current line
+          AlphaHeader = { fg = "#D97706" }, -- Saffron logo
+        }
+      end,
     },
     config = function(_, opts)
-      require("tokyonight").setup(opts)
-      vim.cmd.colorscheme("tokyonight-night")
+      require("catppuccin").setup(opts)
+      vim.cmd.colorscheme("catppuccin-mocha")
     end,
   },
 
@@ -37,7 +60,7 @@ return {
     "nvim-lualine/lualine.nvim",
     opts = {
       options = {
-        theme                = "tokyonight",
+        theme                = "catppuccin",
         globalstatus         = true,
         disabled_filetypes   = { statusline = { "dashboard", "alpha", "starter" } },
         component_separators = { left = "", right = "" },

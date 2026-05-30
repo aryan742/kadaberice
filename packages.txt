@@ -1,0 +1,53 @@
+================================================================================
+                         AryanOS — Core Packages Checklist
+================================================================================
+
+Ensure you install these packages on your Arch Linux system to satisfy all the
+requirements of the AryanOS desktop environment:
+
+--------------------------------------------------------------------------------
+1. CORE DESKTOP & WINDOW MANAGER
+--------------------------------------------------------------------------------
+[ ] hyprland                  - Core Wayland compositor
+[ ] hyprpaper                 - Native high-performance wallpaper daemon
+[ ] waybar                    - Customized floating system status bar
+[ ] rofi-wayland (or rofi)    - App launcher & window switcher (templed/minimalist)
+[ ] dunst                     - Lightweight notification daemon styled with saffron
+[ ] wlogout                   - Power management screen & session controller
+[ ] kitty                     - High-performance GPU accelerated terminal emulator
+
+--------------------------------------------------------------------------------
+2. MULTIMEDIA, UTILITIES & SCREENSHOT
+--------------------------------------------------------------------------------
+[ ] grim                      - Wayland screenshot capture tool
+[ ] slurp                     - Area selection tool
+[ ] wl-clipboard              - Command-line clipboard utility
+[ ] cliphist                  - Clipboard history manager (daemon & integration)
+[ ] yazi                      - Modern rust-based terminal file manager
+[ ] thunar                    - Lightweight GUI file manager
+[ ] pipewire                  - Next-generation audio server
+[ ] pipewire-pulse            - PulseAudio compatibility layer for PipeWire
+[ ] wireplumber               - Pipewire session manager
+
+--------------------------------------------------------------------------------
+3. FONTS & REGIONAL SUPPORT
+--------------------------------------------------------------------------------
+[ ] ttf-jetbrains-mono-nerd   - Core font for terminal, coding, and bars
+[ ] noto-fonts                - Standard system fonts
+[ ] noto-fonts-devanagari     - High-quality Sanskrit/Hindi font support
+[ ] noto-fonts-emoji          - System emojis
+
+--------------------------------------------------------------------------------
+4. SECURE SESSIONS, IDLE & LOCKSCREEN
+--------------------------------------------------------------------------------
+[ ] hyprlock                  - Modern, minimal secure lockscreen for Hyprland
+[ ] hypridle                  - Desktop idle management daemon
+
+--------------------------------------------------------------------------------
+Installation Commands:
+--------------------------------------------------------------------------------
+To install native Arch packages:
+$ sudo pacman -S --needed hyprland hyprpaper waybar rofi dunst kitty grim slurp wl-clipboard cliphist thunar pipewire pipewire-pulse wireplumber ttf-jetbrains-mono-nerd noto-fonts noto-fonts-emoji
+
+To install AUR packages (e.g. via yay):
+$ yay -S --needed yazi hyprlock hypridle wlogout

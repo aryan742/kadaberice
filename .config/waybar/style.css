@@ -1,0 +1,105 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+ * 🌌 AryanOS Waybar Custom Premium CSS Style Sheet
+ * ───────────────────────────────────────────────────────────────────────────── */
+
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "JetBrains Mono Nerd Font", "Noto Sans", sans-serif;
+  font-size: 13px;
+  min-height: 0;
+}
+
+window#waybar {
+  background: rgba(17, 17, 17, 0.90);
+  border: 1px solid rgba(212, 175, 55, 0.35); /* Subtle gold border */
+  border-radius: 8px;
+  color: #F5F0E6; /* Ivory text */
+  transition-property: background-color;
+  transition-duration: 0.5s;
+}
+
+/* ── Left Modules ─────────────────────────────────────────────────────────── */
+
+#custom-launcher {
+  color: #D97706; /* Saffron Accent */
+  font-size: 16px;
+  padding-left: 12px;
+  padding-right: 12px;
+  margin-right: 4px;
+}
+
+#workspaces button {
+  padding: 0 8px;
+  color: rgba(245, 240, 230, 0.4); /* Transparent ivory for inactive */
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+#workspaces button.active {
+  color: #D4AF37; /* Gold active workspace */
+  background: rgba(217, 119, 6, 0.15); /* Light Saffron background tint */
+  border-radius: 4px;
+  border-bottom: 2px solid #D97706;
+}
+
+#workspaces button:hover {
+  color: #F5F0E6;
+  background: rgba(245, 240, 230, 0.08);
+  border-radius: 4px;
+}
+
+/* ── Center Modules ────────────────────────────────────────────────────────── */
+
+#window {
+  font-weight: bold;
+  color: #F5F0E6;
+}
+
+/* ── Right Modules ────────────────────────────────────────────────────────── */
+
+#cpu, #memory, #temperature, #pulseaudio, #bluetooth, #network, #clock, #custom-power {
+  padding: 0 12px;
+  margin: 4px 2px;
+  border-radius: 4px;
+  background: rgba(26, 26, 26, 0.6); /* Secondary background tint */
+  color: #F5F0E6;
+}
+
+/* Accents and highlights for specific system status blocks */
+#cpu {
+  color: #3B82F6; /* Shiva Blue */
+}
+
+#memory {
+  color: #D4AF37; /* Gold */
+}
+
+#temperature {
+  color: #7F1D1D; /* Crimson red */
+}
+
+#pulseaudio {
+  color: #F5F0E6;
+}
+
+#network {
+  color: #D97706; /* Saffron */
+}
+
+#clock {
+  color: #F5F0E6;
+  font-weight: bold;
+}
+
+#custom-power {
+  color: #7F1D1D; /* Crimson logout key */
+  font-size: 14px;
+  padding-right: 14px;
+  margin-right: 4px;
+}
+
+#custom-power:hover {
+  background: rgba(127, 29, 29, 0.25);
+  color: #FF6666;
+}

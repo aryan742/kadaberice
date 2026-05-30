@@ -1,0 +1,108 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 38,
+  "margin-top": 8,
+  "margin-left": 12,
+  "margin-right": 12,
+  "spacing": 6,
+
+  // Modules Layout
+  "modules-left": ["custom/launcher", "hyprland/workspaces"],
+  "modules-center": ["hyprland/window"],
+  "modules-right": [
+    "cpu",
+    "memory",
+    "temperature",
+    "pulseaudio",
+    "bluetooth",
+    "network",
+    "clock",
+    "custom/power"
+  ],
+
+  // ── Left Modules ───────────────────────────────────────────────────────────
+  "custom/launcher": {
+    "format": " ॐ ",
+    "tooltip": false,
+    "on-click": "walker"
+  },
+
+  "hyprland/workspaces": {
+    "format": "{name}",
+    "on-click": "activate",
+    "all-outputs": true,
+    "sort-by-number": true,
+    "persistent-workspaces": {
+      "1": [],
+      "2": [],
+      "3": [],
+      "4": [],
+      "5": [],
+      "6": [],
+      "7": [],
+      "8": [],
+      "9": []
+    }
+  },
+
+  // ── Center Modules ──────────────────────────────────────────────────────────
+  "hyprland/window": {
+    "format": "{title}",
+    "max-length": 45,
+    "separate-outputs": true
+  },
+
+  // ── Right Modules ──────────────────────────────────────────────────────────
+  "cpu": {
+    "format": "󰍛 {usage}%",
+    "interval": 2
+  },
+
+  "memory": {
+    "format": "󰾆 {percentage}%",
+    "interval": 2
+  },
+
+  "temperature": {
+    "thermal-zone": 2,
+    "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+    "critical-threshold": 80,
+    "format": " {temperatureC}°C",
+    "format-critical": " {temperatureC}°C"
+  },
+
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": "󰝟 Muted",
+    "format-icons": {
+      "default": ["󰕿", "󰖀", "󰕾"]
+    },
+    "on-click": "pavucontrol"
+  },
+
+  "bluetooth": {
+    "format": "󰂯 {status}",
+    "format-connected": "󰂱 {device_alias}",
+    "format-disabled": "󰂲 Off",
+    "on-click": "blueman-manager"
+  },
+
+  "network": {
+    "format-wifi": " {essid}",
+    "format-ethernet": "󰈀 Wired",
+    "format-disconnected": "󰖪 Off",
+    "on-click": "nm-connection-editor"
+  },
+
+  "clock": {
+    "format": "󰸗 {:%b %d   %H:%M}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+  },
+
+  "custom/power": {
+    "format": "⏻ ",
+    "tooltip": false,
+    "on-click": "loginctl terminate-user \"\""
+  }
+}

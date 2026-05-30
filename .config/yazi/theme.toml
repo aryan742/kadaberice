@@ -1,0 +1,41 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# 🌌 AryanOS Yazi Theme Settings Sheet
+# ─────────────────────────────────────────────────────────────────────────────
+
+[manager]
+# Active select line
+active = { fg = "#111111", bg = "#D97706", bold = true } # Saffron Accent for Selection
+inactive = { fg = "#F5F0E6", bg = "#1A1A1A" }
+
+# Border decorations
+border_style = { fg = "#D4AF37" } # Gold Borders
+
+# Current selected files
+tombstone = { fg = "#7F1D1D" }
+synced    = { fg = "#3B82F6" }
+
+[status]
+separator_open  = ""
+separator_close = ""
+separator_style = { fg = "#1A1A1A", bg = "#1A1A1A" }
+
+# Mode coloring
+mode_normal = { fg = "#111111", bg = "#3B82F6", bold = true } # Shiva Blue Mode
+mode_select = { fg = "#111111", bg = "#D97706", bold = true } # Saffron Selection Mode
+mode_unset  = { fg = "#111111", bg = "#7F1D1D", bold = true } # Crimson warning Mode
+
+[filetype]
+rules = [
+    # Folders
+    { mime = "inode/directory", fg = "#3B82F6" }, # Shiva Blue for directories
+    
+    # Text / Code
+    { mime = "text/*", fg = "#F5F0E6" }, # Ivory
+    
+    # Images / Video
+    { mime = "image/*", fg = "#D4AF37" }, # Gold
+    { mime = "video/*", fg = "#D97706" }, # Saffron
+    
+    # Archives
+    { mime = "application/zip", fg = "#7F1D1D" } # Crimson
+]
