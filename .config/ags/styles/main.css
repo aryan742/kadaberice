@@ -1,109 +1,157 @@
-/* AryanOS AGS Styling */
+/* ─────────────────────────────────────────────────────────────────
+   AryanOS — Caelestia Aesthetic Coverflow System (Clean & Fast)
+   ───────────────────────────────────────────────────────────────── */
+
+@import "../../waybar/colors.css";
 
 * {
-    font-family: "JetBrains Mono Nerd Font", "Noto Sans Devanagari", sans-serif;
-    color: #F5F0E6; /* Soft white/Ivory */
+    font-family: "Inter", "Tiro Devanagari Sanskrit", sans-serif;
+    color: #F5F0E6;
+    transition: all 0.2s ease-out;
 }
 
-/* Glassmorphism base for windows */
 window {
     background-color: transparent;
 }
 
-.window-content {
-    background-color: rgba(17, 17, 17, 0.65); /* Blur backend handled by Hyprland */
-    border: 2px solid rgba(217, 119, 6, 0.4); /* Muted saffron accent border */
-    border-radius: 16px;
-    padding: 24px;
+.fullscreen-overlay {
+    background-color: rgba(10, 10, 14, 0.85);
+    padding: 0;
 }
 
-/* App Launcher Carousel */
-.app-launcher .search-entry {
-    background-color: rgba(26, 26, 26, 0.8);
-    border: 1px solid rgba(112, 128, 144, 0.5); /* Slate blue tint */
-    border-radius: 8px;
-    padding: 12px;
-    font-size: 20px;
-    margin-bottom: 24px;
+/* ── Top Navigation Pill (Centered at Top) ─────────────────────── */
+.top-nav-bar {
+    margin-top: 24px;
+    margin-bottom: 12px;
 }
 
-.app-launcher .search-entry:focus {
-    border-color: rgba(217, 119, 6, 0.8);
+.nav-pill {
+    background-color: rgba(22, 20, 26, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50px;
+    padding: 4px 18px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.1);
 }
 
-.carousel-container {
-    padding: 10px;
-}
-
-.app-card {
-    background-color: rgba(26, 26, 26, 0.5);
-    border-radius: 12px;
-    padding: 16px;
-    margin: 0 8px;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.app-card.active {
-    background-color: rgba(112, 128, 144, 0.4); /* Slate blue highlight */
-    border: 1px solid rgba(217, 119, 6, 0.9);
-    padding: 32px;
-    min-width: 200px;
-    min-height: 200px;
-}
-
-.app-card .icon {
-    font-size: 64px;
-}
-
-.app-card.active .icon {
-    font-size: 128px;
-}
-
-.app-card .title {
+.nav-item {
     font-size: 14px;
-    font-weight: bold;
-    margin-top: 12px;
+    font-weight: 700;
+    padding: 6px 16px;
+    margin: 0 2px;
+    border-radius: 50px;
+    background-color: transparent;
+    color: rgba(245, 240, 230, 0.65);
+    border: none;
 }
 
-.app-card.active .title {
-    font-size: 24px;
-}
-
-/* Workspace Carousel */
-.workspace-card {
-    background-color: rgba(26, 26, 26, 0.5);
-    border-radius: 12px;
-    margin: 0 12px;
-    padding: 12px;
-    transition: all 0.3s ease;
-}
-
-.workspace-card.active {
-    background-color: rgba(217, 119, 6, 0.2);
-    border: 2px solid rgba(217, 119, 6, 0.9);
-    padding: 24px;
-}
-
-.workspace-name {
-    font-size: 24px;
-    font-weight: bold;
+.nav-item:hover {
     color: #F5F0E6;
+    background-color: rgba(255, 255, 255, 0.08);
 }
 
-.workspace-card.active .workspace-name {
-    font-size: 48px;
-    color: #D4AF37; /* Gold/Saffron */
+.nav-item.active {
+    color: #ffffff;
+    background-color: rgba(196, 168, 196, 0.35);
+    border: 1px solid rgba(255, 176, 202, 0.7);
+    box-shadow: 0 0 12px rgba(255, 176, 202, 0.3);
 }
 
-/* Wallpaper Carousel */
-.wallpaper-card {
-    border-radius: 12px;
-    margin: 0 8px;
-    border: 2px solid transparent;
-    transition: all 0.3s ease;
+.search-pill-entry {
+    background-color: transparent;
+    border: none;
+    font-size: 13px;
+    padding: 2px 8px;
+    color: #F5F0E6;
+    min-width: 160px;
 }
 
-.wallpaper-card.active {
-    border: 2px solid rgba(217, 119, 6, 1.0);
-    padding: 4px;
+.search-pill-entry:focus {
+    box-shadow: none;
+}
+
+/* ── CoverFlow Carousel ────────────────────────────────────────── */
+.carousel-container {
+    padding: 20px 100px;
+}
+
+/* Base Card Style (Side Inactive Cards) */
+.flow-card {
+    border-radius: 14px;
+    background-color: rgba(18, 16, 22, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    margin: 0 4px;
+    opacity: 0.75;
+
+    transition: opacity 0.2s ease-out;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.flow-card.neighbor {
+    opacity: 0.92;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* Center Active Featured Card */
+.flow-card.active {
+    background-color: rgba(12, 10, 15, 0.98);
+    border: 2px solid rgba(255, 176, 202, 0.9);
+    border-radius: 18px;
+    margin: 0 14px;
+    opacity: 1.0;
+
+    box-shadow:
+        0 0 45px rgba(255, 176, 202, 0.3),
+        0 16px 48px rgba(0, 0, 0, 0.8),
+        inset 0 1px 1px rgba(255, 255, 255, 0.25);
+}
+
+/* Center Bottom App Name Pill */
+.card-name-pill {
+    background-color: rgba(15, 12, 18, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 10px;
+    padding: 6px 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+}
+
+.card-name-pill label {
+    font-family: "Manrope", "Inter", sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+}
+
+/* Bottom Right Category Tag */
+.category-badge {
+    background-color: rgba(15, 12, 18, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    padding: 3px 10px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+
+.category-badge label {
+    font-size: 10px;
+    font-weight: 800;
+    color: rgba(245, 240, 230, 0.85);
+    letter-spacing: 1px;
+}
+
+.app-icon-container {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    padding: 24px;
+    border: 1px solid rgba(255, 176, 202, 0.3);
+    box-shadow: 0 0 30px rgba(255, 176, 202, 0.15);
+}
+
+.app-title {
+    font-family: "Manrope", "Inter", sans-serif;
+    font-size: 32px;
+    font-weight: 900;
+    color: #ffffff;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
 }

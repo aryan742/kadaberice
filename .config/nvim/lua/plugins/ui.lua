@@ -3,55 +3,54 @@
 -- ─────────────────────────────────────────────────────────────────────────────
 
 return {
-  -- ── Colorscheme: Catppuccin (Ancient Manuscript Override) ──────────────────
+  -- ── Colorscheme: TokyoNight ────────────────────────────────────────────────
   {
-    "catppuccin/nvim",
-    name     = "catppuccin",
-    lazy     = false,
+    "folke/tokyonight.nvim",
+    lazy    = false,
     priority = 1000,
     opts = {
-      flavour             = "mocha", -- base theme
-      transparent_background = false,
-      color_overrides = {
-        mocha = {
-          base      = "#111111", -- Deep Dark Background
-          mantle    = "#0e0e0e",
-          crust     = "#0a0a0a",
-          text      = "#F5F0E6", -- Ivory text
-          subtext1  = "#E5DEC9",
-          subtext0  = "#D5CDB2",
-          overlay2  = "#BFA67A",
-          overlay1  = "#A08A63",
-          overlay0  = "#806E4D", -- Parchment / manuscript brown comments
-          surface2  = "#3a3a3a",
-          surface1  = "#2a2a2a",
-          surface0  = "#1c1c1c",
-          
-          -- Custom accent maps:
-          red       = "#7F1D1D", -- Crimson
-          peach     = "#D97706", -- Saffron String Accent
-          yellow    = "#D4AF37", -- Gold
-          blue      = "#3B82F6", -- Shiva Blue
-          green     = "#A3E635",
-          teal      = "#0D9488",
-          sky       = "#38BDF8",
-          sapphire  = "#2563EB",
-          lavender  = "#818CF8",
-          mauve     = "#D97706", -- Saffron Keywords
-        },
+      style        = "night",    -- night | storm | moon | day
+      transparent  = false,
+      terminal_colors = true,
+      styles = {
+        comments   = { italic = true },
+        keywords   = { italic = true },
+        functions  = {},
+        variables  = {},
+        sidebars   = "dark",
+        floats     = "dark",
       },
-      custom_highlights = function(colors)
-        return {
-          Comment = { fg = "#8A7D63", style = { "italic" } }, -- Parchment
-          LineNr = { fg = "#5A503C" },
-          CursorLineNr = { fg = "#D4AF37", style = { "bold" } }, -- Gold current line
-          AlphaHeader = { fg = "#D97706" }, -- Saffron logo
-        }
+      sidebars         = { "qf", "help", "neo-tree", "Trouble", "lazy", "mason" },
+      day_brightness   = 0.3,
+      hide_inactive_statusline = false,
+      dim_inactive     = false,
+      lualine_bold     = true,
+      on_highlights = function(hl, c)
+        -- Saffron current line highlight & Gold borders
+        hl.CursorLineNr = { fg = "#D97706", bold = true }
+        hl.FloatBorder = { fg = "#D4AF37" }
+        hl.TelescopeBorder = { fg = "#D4AF37" }
+        
+        -- Dashboard Saffron header mapping
+        hl.AlphaHeader = { fg = "#D97706", bold = true }
+        hl.AlphaFooter = { fg = "#D4AF37" }
+        
+        -- NeoTree Gold directory customization
+        hl.NeoTreeDirectoryIcon = { fg = "#D4AF37" }
+        hl.NeoTreeDirectoryName = { fg = "#F5F0E6" }
+        
+        -- Standard highlights matching AryanOS 70/20/10 system
+        hl.NormalFloat = { bg = "#111111" }
+        hl.LineNr = { fg = "#444444" }
       end,
     },
     config = function(_, opts)
-      require("catppuccin").setup(opts)
-      vim.cmd.colorscheme("catppuccin-mocha")
+      require("tokyonight").setup(opts)
+      vim.cmd.colorscheme("tokyonight-night")
+      
+      -- Set AlphaHeader fallback explicitly in API
+      vim.api.nvim_set_hl(0, "AlphaHeader", { fg = "#D97706", bold = true })
+      vim.api.nvim_set_hl(0, "AlphaFooter", { fg = "#D4AF37" })
     end,
   },
 
@@ -60,7 +59,7 @@ return {
     "nvim-lualine/lualine.nvim",
     opts = {
       options = {
-        theme                = "catppuccin",
+        theme                = "tokyonight",
         globalstatus         = true,
         disabled_filetypes   = { statusline = { "dashboard", "alpha", "starter" } },
         component_separators = { left = "", right = "" },
@@ -164,8 +163,8 @@ return {
       dashboard.section.footer.opts   = { hl = "AlphaFooter", position = "center" }
 
       -- Highlights
-      vim.api.nvim_set_hl(0, "AlphaHeader", { fg = "#7aa2f7" })  -- tokyonight blue
-      vim.api.nvim_set_hl(0, "AlphaFooter", { fg = "#565f89" })  -- muted
+      vim.api.nvim_set_hl(0, "AlphaHeader", { fg = "#D97706", bold = true })  -- saffron
+      vim.api.nvim_set_hl(0, "AlphaFooter", { fg = "#D4AF37" })  -- gold
 
       alpha.setup(dashboard.config)
     end,

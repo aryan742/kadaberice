@@ -1,75 +1,62 @@
 {
   "layer": "top",
-  "position": "top",
-  "height": 38,
-  "margin-top": 8,
-  "margin-left": 12,
-  "margin-right": 12,
-  "spacing": 6,
+  "position": "bottom",
+  "height": 42,
+  "width": 1280,
+  "margin-bottom": 12,
+  "spacing": 8,
 
   // Modules Layout
-  "modules-left": ["custom/launcher", "hyprland/workspaces"],
-  "modules-center": ["hyprland/window"],
+  "modules-left": [
+    "custom/launcher",
+    "hyprland/workspaces",
+    "hyprland/window"
+  ],
+  "modules-center": [],
   "modules-right": [
-    "cpu",
     "memory",
-    "temperature",
     "pulseaudio",
     "bluetooth",
     "network",
+    "battery",
     "clock",
     "custom/power"
   ],
 
-  // ── Left Modules ───────────────────────────────────────────────────────────
+  // Left Modules
   "custom/launcher": {
-    "format": " ॐ ",
-    "tooltip": false,
-    "on-click": "walker"
+    "format": "▲",
+    "on-click": "rofi -show drun -theme dmenu",
+    "tooltip": false
   },
 
   "hyprland/workspaces": {
-    "format": "{name}",
+    "format": "{icon}",
     "on-click": "activate",
     "all-outputs": true,
-    "sort-by-number": true,
-    "persistent-workspaces": {
-      "1": [],
-      "2": [],
-      "3": [],
-      "4": [],
-      "5": [],
-      "6": [],
-      "7": [],
-      "8": [],
-      "9": []
+    "show-special": false,
+    "format-icons": {
+      "default": "•",
+      "active": "◉",
+      "urgent": ""
     }
   },
 
-  // ── Center Modules ──────────────────────────────────────────────────────────
   "hyprland/window": {
-    "format": "{title}",
-    "max-length": 45,
-    "separate-outputs": true
+    "format": "󰘚 {title}",
+    "max-length": 35,
+    "separate-outputs": true,
+    "rewrite": {
+      "": "󰘚 Desktop"
+    }
   },
 
-  // ── Right Modules ──────────────────────────────────────────────────────────
-  "cpu": {
-    "format": "󰍛 {usage}%",
-    "interval": 2
-  },
-
+  // Right Modules
   "memory": {
+    "interval": 5,
     "format": "󰾆 {percentage}%",
-    "interval": 2
-  },
-
-  "temperature": {
-    "thermal-zone": 2,
-    "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-    "critical-threshold": 80,
-    "format": " {temperatureC}°C",
-    "format-critical": " {temperatureC}°C"
+    "tooltip": true,
+    "tooltip-format": "RAM: {used:0.1f}GiB / {total:0.1f}GiB"
   },
 
   "pulseaudio": {
@@ -85,24 +72,53 @@
     "format": "󰂯 {status}",
     "format-connected": "󰂱 {device_alias}",
     "format-disabled": "󰂲 Off",
-    "on-click": "blueman-manager"
+    "on-click": "blueman-manager",
+    "tooltip-format": "{controller_alias}\t{controller_address}"
   },
 
   "network": {
     "format-wifi": " {essid}",
     "format-ethernet": "󰈀 Wired",
-    "format-disconnected": "󰖪 Off",
-    "on-click": "nm-connection-editor"
+    "format-disconnected": "󰤮 None",
+    "on-click": "nm-connection-editor",
+    "tooltip-format": "IP: {ipaddr}/{cidr}"
+  },
+
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon} {capacity}%",
+    "format-charging": "󰂄 {capacity}%",
+    "format-plugged": "󰚥 {capacity}%",
+    "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
   },
 
   "clock": {
-    "format": "󰸗 {:%b %d   %H:%M}",
-    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    "timezone": "Asia/Kolkata",
+    "format": " {:%I:%M %p}",
+    "format-alt": " {:%a, %d %b %Y  %I:%M %p}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "interval": 60,
+    "calendar": {
+      "mode": "month",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
+      "format": {
+        "months": "<span color='#ffb0ca'><b>{}</b></span>",
+        "days": "<span color='#e8d5e8'><b>{}</b></span>",
+        "weeks": "<span color='#7171ac'><b>W{}</b></span>",
+        "weekdays": "<span color='#c4a8c4'><b>{}</b></span>",
+        "today": "<span color='#ff6ba0'><b><u>{}</u></b></span>"
+      }
+    }
   },
 
   "custom/power": {
-    "format": "⏻ ",
-    "tooltip": false,
-    "on-click": "loginctl terminate-user \"\""
+    "format": "⏻",
+    "on-click": "wlogout",
+    "tooltip": false
   }
 }

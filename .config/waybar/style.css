@@ -1,105 +1,159 @@
-/* ─────────────────────────────────────────────────────────────────────────────
- * 🌌 AryanOS Waybar Custom Premium CSS Style Sheet
- * ───────────────────────────────────────────────────────────────────────────── */
+/* =============================================================================
+ * Waybar Stylesheet — Caelestia Light-Plum & Cream Material 3 Aesthetics
+ * ============================================================================= */
 
+@import "colors.css";
+
+/* Primary Fonts & Base Styling */
 * {
-  border: none;
-  border-radius: 0;
-  font-family: "JetBrains Mono Nerd Font", "Noto Sans", sans-serif;
-  font-size: 13px;
-  min-height: 0;
+    font-family: "Inter", "Tiro Devanagari Sanskrit", sans-serif;
+    font-size: 13px;
+    font-weight: 600;
 }
 
 window#waybar {
-  background: rgba(17, 17, 17, 0.90);
-  border: 1px solid rgba(212, 175, 55, 0.35); /* Subtle gold border */
-  border-radius: 8px;
-  color: #F5F0E6; /* Ivory text */
-  transition-property: background-color;
-  transition-duration: 0.5s;
+    background: rgba(247, 239, 249, 0.85); /* Exquisite cream-white/rosewater background with high transparency */
+    border: 1px solid rgba(118, 117, 142, 0.15); /* Elegant thin lavender border */
+    border-radius: 24px; /* Floating pill dock */
+    color: #35082e; /* M3 dark plum-black on-surface */
+    transition-property: background-color;
+    transition-duration: 0.5s;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05); /* Premium soft drop shadow */
 }
 
-/* ── Left Modules ─────────────────────────────────────────────────────────── */
-
+/* 🔱 Left Side Logo */
 #custom-launcher {
-  color: #D97706; /* Saffron Accent */
-  font-size: 16px;
-  padding-left: 12px;
-  padding-right: 12px;
-  margin-right: 4px;
+    color: #68355c; /* M3 Deep Purple/Plum Accent */
+    font-size: 15px;
+    padding: 0 12px;
+    margin: 4px 4px;
+    border-radius: 16px;
+    background: transparent;
+    transition: all 0.25s ease;
+}
+
+#custom-launcher:hover {
+    background: rgba(118, 117, 142, 0.12);
+    color: #35082e;
+}
+
+/* 🔴 Workspaces Pill */
+#workspaces {
+    background: rgba(118, 117, 142, 0.08); /* Soft light lavender-grey container */
+    padding: 2px 6px;
+    margin: 4px 6px;
+    border-radius: 20px;
+    border: 1px solid rgba(118, 117, 142, 0.06);
 }
 
 #workspaces button {
-  padding: 0 8px;
-  color: rgba(245, 240, 230, 0.4); /* Transparent ivory for inactive */
-  background: transparent;
-  transition: all 0.3s ease;
+    padding: 0;
+    margin: 0 2px;
+    min-width: 28px;
+    min-height: 28px;
+    border-radius: 50%; /* Circle layout */
+    color: #76758e; /* Muted lavender-grey */
+    background: transparent;
+    border: none;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 16px; /* For bullet character */
 }
 
 #workspaces button.active {
-  color: #D4AF37; /* Gold active workspace */
-  background: rgba(217, 119, 6, 0.15); /* Light Saffron background tint */
-  border-radius: 4px;
-  border-bottom: 2px solid #D97706;
+    color: #ffffff; /* White dot inside active pill */
+    background: #4e1e44; /* Deep plum/tertiary active background */
+}
+
+#workspaces button.urgent {
+    background: #ffb4ab;
+    color: #690005;
 }
 
 #workspaces button:hover {
-  color: #F5F0E6;
-  background: rgba(245, 240, 230, 0.08);
-  border-radius: 4px;
+    background: rgba(118, 117, 142, 0.15);
+    color: #35082e;
 }
 
-/* ── Center Modules ────────────────────────────────────────────────────────── */
-
+/* 🏢 Center Module — Active window title (Manrope for Titles) */
 #window {
-  font-weight: bold;
-  color: #F5F0E6;
+    font-family: "Manrope", "Inter", sans-serif;
+    color: #35082e;
+    font-weight: 800;
+    padding: 0 14px;
+    margin: 4px 8px;
+    border-radius: 16px;
+    background: transparent;
 }
 
-/* ── Right Modules ────────────────────────────────────────────────────────── */
-
-#cpu, #memory, #temperature, #pulseaudio, #bluetooth, #network, #clock, #custom-power {
-  padding: 0 12px;
-  margin: 4px 2px;
-  border-radius: 4px;
-  background: rgba(26, 26, 26, 0.6); /* Secondary background tint */
-  color: #F5F0E6;
+/* ⚙️ Right Side Modules */
+#memory,
+#pulseaudio,
+#bluetooth,
+#network,
+#battery,
+#clock,
+#custom-power {
+    background: rgba(118, 117, 142, 0.08); /* Frosted Material 3 container */
+    padding: 0 14px;
+    margin: 4px 3px;
+    border-radius: 16px;
+    border: 1px solid rgba(118, 117, 142, 0.06);
+    color: #35082e;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-/* Accents and highlights for specific system status blocks */
-#cpu {
-  color: #3B82F6; /* Shiva Blue */
+#memory:hover,
+#pulseaudio:hover,
+#bluetooth:hover,
+#network:hover,
+#battery:hover,
+#clock:hover {
+    background: rgba(118, 117, 142, 0.15);
+    border-color: rgba(118, 117, 142, 0.25);
 }
 
 #memory {
-  color: #D4AF37; /* Gold */
-}
-
-#temperature {
-  color: #7F1D1D; /* Crimson red */
+    color: #7171ac; /* Muted primary blue-lavender */
 }
 
 #pulseaudio {
-  color: #F5F0E6;
+    color: #68355c; /* Warm plum */
+}
+
+#bluetooth {
+    color: #76758e; /* Muted lavender-grey */
 }
 
 #network {
-  color: #D97706; /* Saffron */
+    color: #7171ac; /* Muted primary blue-lavender */
+}
+
+#battery {
+    color: #68355c; /* Warm plum */
+}
+
+#battery.charging, #battery.plugged {
+    color: #7171ac; /* Muted primary blue-lavender when charging */
+}
+
+#battery.critical:not(.charging) {
+    background-color: #ffb4ab;
+    color: #690005;
 }
 
 #clock {
-  color: #F5F0E6;
-  font-weight: bold;
+    color: #35082e; /* M3 dark plum-black */
+    font-weight: bold;
 }
 
 #custom-power {
-  color: #7F1D1D; /* Crimson logout key */
-  font-size: 14px;
-  padding-right: 14px;
-  margin-right: 4px;
+    color: #690005; /* Soft warning crimson */
+    font-size: 14px;
+    padding-right: 14px;
 }
 
 #custom-power:hover {
-  background: rgba(127, 29, 29, 0.25);
-  color: #FF6666;
+    background: rgba(105, 0, 5, 0.12);
+    border-color: rgba(105, 0, 5, 0.25);
+    color: #690005;
 }

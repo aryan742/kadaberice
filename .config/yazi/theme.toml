@@ -1,41 +1,28 @@
-# ─────────────────────────────────────────────────────────────────────────────
-# 🌌 AryanOS Yazi Theme Settings Sheet
-# ─────────────────────────────────────────────────────────────────────────────
+# ─────────────────────────────────────────────────────────────────
+# AryanOS — Yazi File Manager Custom Theme
+# ─────────────────────────────────────────────────────────────────
 
 [manager]
-# Active select line
-active = { fg = "#111111", bg = "#D97706", bold = true } # Saffron Accent for Selection
-inactive = { fg = "#F5F0E6", bg = "#1A1A1A" }
-
-# Border decorations
-border_style = { fg = "#D4AF37" } # Gold Borders
-
-# Current selected files
-tombstone = { fg = "#7F1D1D" }
-synced    = { fg = "#3B82F6" }
-
+    # Highlight color for selected items (Gold background, dark foreground)
+    border_symbol = "│"
+    
 [status]
-separator_open  = ""
-separator_close = ""
-separator_style = { fg = "#1A1A1A", bg = "#1A1A1A" }
-
-# Mode coloring
-mode_normal = { fg = "#111111", bg = "#3B82F6", bold = true } # Shiva Blue Mode
-mode_select = { fg = "#111111", bg = "#D97706", bold = true } # Saffron Selection Mode
-mode_unset  = { fg = "#111111", bg = "#7F1D1D", bold = true } # Crimson warning Mode
+    # Status line styling (Ivory text, deep crimson alert badges)
+    separator_open  = ""
+    separator_close = ""
 
 [filetype]
-rules = [
-    # Folders
-    { mime = "inode/directory", fg = "#3B82F6" }, # Shiva Blue for directories
-    
-    # Text / Code
-    { mime = "text/*", fg = "#F5F0E6" }, # Ivory
-    
-    # Images / Video
-    { mime = "image/*", fg = "#D4AF37" }, # Gold
-    { mime = "video/*", fg = "#D97706" }, # Saffron
-    
-    # Archives
-    { mime = "application/zip", fg = "#7F1D1D" } # Crimson
-]
+    # Directory highlighting with beautiful Gold accent
+    rules = [
+        { mime = "inode/directory", fg = "#D4AF37" },
+        
+        # Executable and Scripts with Saffron accent
+        { exec = "*", fg = "#D97706" },
+        
+        # Media and photos with Shiva Blue accent
+        { mime = "image/*", fg = "#3B82F6" },
+        { mime = "video/*", fg = "#3B82F6" },
+        
+        # Documents and logs with warm Ivory
+        { mime = "text/*", fg = "#F5F0E6" }
+    ]
