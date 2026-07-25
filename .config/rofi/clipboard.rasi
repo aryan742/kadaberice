@@ -1,0 +1,82 @@
+/* ─────────────────────────────────────────────────────────────────
+ * AryanOS — Matugen Dynamic Rofi Clipboard Theme
+ * ───────────────────────────────────────────────────────────────── */
+@import "colors.rasi"
+
+configuration {
+    show-icons: false;
+    font: "Inter 11";
+    matching: "fuzzy";
+    scroll-method: 0;
+    disable-history: true;
+}
+
+window {
+    transparency: "real";
+    background-color: @matugen-background;
+    text-color: @matugen-on-background;
+    border: 2px;
+    border-color: @matugen-primary;
+    border-radius: 12px;
+    width: 700px;
+    location: center;
+    anchor: center;
+}
+
+mainbox {
+    background-color: transparent;
+    spacing: 12px;
+    padding: 18px;
+    children: [ "inputbar", "listview" ];
+}
+
+inputbar {
+    background-color: @matugen-surface;
+    text-color: @matugen-on-surface;
+    border-radius: 8px;
+    padding: 10px 14px;
+    spacing: 10px;
+    children: [ "prompt", "entry" ];
+}
+
+prompt {
+    background-color: transparent;
+    text-color: @matugen-primary;
+}
+
+entry {
+    background-color: transparent;
+    text-color: @matugen-on-surface;
+    placeholder: "Type to search clipboard history...";
+    placeholder-color: @matugen-outline;
+}
+
+listview {
+    background-color: transparent;
+    columns: 1;
+    lines: 10;
+    spacing: 6px;
+    cycle: true;
+    dynamic: true;
+    layout: vertical;
+}
+
+element {
+    background-color: transparent;
+    text-color: @matugen-on-background;
+    border-radius: 6px;
+    padding: 8px 12px;
+}
+
+element selected {
+    background-color: @matugen-primary;
+    text-color: @matugen-on-primary;
+}
+
+element-text {
+    background-color: transparent;
+    text-color: inherit;
+    highlight: inherit;
+    cursor: inherit;
+    vertical-align: 0.5;
+}
