@@ -21,7 +21,7 @@ window#osd-window {
 #osd-icon {
     font-family: "Inter", "Manrope", sans-serif;
     font-size: 18px; /* 18px monochrome symbolic icon */
-    color: @matugen_primary; /* Dynamic primary color accent */
+    color: #35082e; /* M3 dark plum Waybar text color */
     margin-right: 8px; /* Spacing: 8px */
 }
 
@@ -47,7 +47,7 @@ window#osd-window {
     font-family: "Inter", sans-serif;
     font-size: 13px; /* 13px Inter Medium */
     font-weight: 500; /* Medium weight */
-    color: @matugen_primary;
+    color: #35082e; /* M3 dark plum Waybar text color */
     margin-left: 8px; /* Spacing: 8px */
     min-width: 36px;
 }
@@ -56,6 +56,6 @@ window#osd-window {
     font-family: "Inter", sans-serif;
     font-size: 13px; /* 13px Inter Medium */
     font-weight: 500; /* Medium weight */
-    color: @matugen_primary;
+    color: #35082e; /* M3 dark plum Waybar text color */
     margin-left: 8px;
 }
