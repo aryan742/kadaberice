@@ -1,0 +1,27 @@
+-- ─────────────────────────────────────────────────────────────────
+-- AryanOS — Hyprland Plugins Configuration (Lua)
+-- ─────────────────────────────────────────────────────────────────
+-- NOTE: hyprexpo plugin config is ready but the plugin itself is not
+-- loaded here via plugins.lua — it must be loaded via hyprpm.
+-- Run the install commands below first, then uncomment the plugin block.
+--
+-- ── INSTALL COMMANDS (run in terminal as user, NOT root) ──────────
+--   sudo pacman -S cmake
+--   hyprpm update
+--   hyprpm add https://github.com/hyprwm/hyprland-plugins
+--   hyprpm enable hyprexpo
+--   hyprpm reload
+--
+-- ── AFTER INSTALLATION, uncomment below ──────────────────────────
+
+-- hl.config({
+--     plugin = {
+--         hyprexpo = {
+--             columns = 3,
+--             gaps_in = 10,
+--             gaps_out = 15,
+--             bg_col = "rgba(0, 0, 0, 0.85)",
+--             workspace_method = "center current",
+--         },
+--     },
+-- })

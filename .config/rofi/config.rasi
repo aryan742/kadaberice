@@ -1,0 +1,9 @@
+/* Rofi Master Config — Imports Matugen colors.rasi */
+@import "colors.rasi"
+
+configuration {
+    modi: "drun,run,window";
+    show-icons: true;
+    icon-theme: "BeautyLine";
+    font: "Inter 11";
+}

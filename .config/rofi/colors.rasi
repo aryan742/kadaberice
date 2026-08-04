@@ -1,0 +1,16 @@
+/* Matugen Generated Rofi Palette */
+* {
+    matugen-primary: #f5bc6f;
+    matugen-on-primary: #452b00;
+    matugen-primary-container: #633f00;
+    matugen-on-primary-container: #ffddb4;
+
+    matugen-secondary: #dec2a2;
+    matugen-on-secondary: #3e2d16;
+
+    matugen-surface: #18120b;
+    matugen-on-surface: #ede0d4;
+    matugen-background: #18120b;
+    matugen-on-background: #ede0d4;
+    matugen-outline: #9c8f80;
+}
