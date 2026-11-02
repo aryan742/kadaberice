@@ -15,11 +15,11 @@
 
 /* ── Main Bar Container (Floating Dock with Glassmorphism) ── */
 window#waybar {
-    background-color: alpha(@matugen_background, 0.75);
-    border: 1px solid alpha(@matugen_outline, 0.25);
+    background-color: alpha(@matugen_background, 0.78);
+    border: 1px solid alpha(@matugen_outline, 0.22);
     border-radius: 24px;
     color: @matugen_on_surface;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.35);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
     transition: background-color 0.4s ease, border-color 0.4s ease;
 }
 
@@ -38,40 +38,41 @@ window#waybar {
 #custom-launcher:hover {
     background-color: @matugen_primary;
     color: @matugen_on_primary;
-    box-shadow: 0 0 12px alpha(@matugen_primary, 0.5);
+    box-shadow: 0 0 14px alpha(@matugen_primary, 0.55);
 }
 
 /* ── Workspaces Pill Dock ── */
 #workspaces {
     background-color: alpha(@matugen_surface_variant, 0.35);
-    padding: 3px 6px;
-    margin: 4px 6px;
+    padding: 3px 5px;
+    margin: 4px 4px;
     border-radius: 18px;
     border: 1px solid alpha(@matugen_outline, 0.15);
 }
 
 #workspaces button {
-    padding: 0 6px;
+    padding: 0 8px;
     margin: 0 2px;
-    min-width: 26px;
-    min-height: 26px;
-    border-radius: 13px;
-    color: @matugen_on_surface_variant;
+    min-width: 24px;
+    min-height: 24px;
+    border-radius: 12px;
+    color: alpha(@matugen_on_surface, 0.65);
     background-color: transparent;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    font-size: 14px;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    font-size: 12px;
+    font-weight: 700;
 }
 
 #workspaces button.active {
     color: @matugen_on_primary;
     background-color: @matugen_primary;
     min-width: 32px;
-    box-shadow: 0 0 10px alpha(@matugen_primary, 0.4);
+    box-shadow: 0 0 12px alpha(@matugen_primary, 0.45);
 }
 
 #workspaces button.urgent {
-    background-color: #ffb4ab;
-    color: #690005;
+    background-color: #ff5555;
+    color: #ffffff;
 }
 
 #workspaces button:hover {
@@ -81,10 +82,11 @@ window#waybar {
 
 /* ── Window Title Module ── */
 #window {
-    color: @matugen_on_surface;
-    font-weight: 700;
-    padding: 0 14px;
-    margin: 4px 8px;
+    color: alpha(@matugen_on_surface, 0.85);
+    font-weight: 600;
+    font-size: 12px;
+    padding: 0 12px;
+    margin: 4px 4px;
     border-radius: 18px;
     background-color: transparent;
 }
@@ -93,37 +95,95 @@ window#waybar.empty #window {
     background-color: transparent;
 }
 
+/* ── Center Modules (Clock & MPRIS) ── */
+#clock {
+    background-color: alpha(@matugen_surface_variant, 0.35);
+    padding: 0 16px;
+    margin: 4px 4px;
+    border-radius: 18px;
+    border: 1px solid alpha(@matugen_outline, 0.15);
+    color: @matugen_on_surface;
+    font-weight: 700;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#clock:hover {
+    background-color: alpha(@matugen_surface_variant, 0.65);
+    border-color: alpha(@matugen_primary, 0.4);
+    box-shadow: 0 2px 10px alpha(@matugen_primary, 0.25);
+    color: @matugen_primary;
+}
+
+#mpris {
+    background-color: alpha(@matugen_surface_variant, 0.35);
+    padding: 0 14px;
+    margin: 4px 4px;
+    border-radius: 18px;
+    border: 1px solid alpha(@matugen_outline, 0.15);
+    color: @matugen_secondary;
+    font-size: 12px;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#mpris:hover {
+    background-color: alpha(@matugen_surface_variant, 0.65);
+    border-color: alpha(@matugen_primary, 0.4);
+    box-shadow: 0 2px 10px alpha(@matugen_primary, 0.25);
+}
+
+#mpris.paused {
+    color: alpha(@matugen_on_surface, 0.5);
+}
+
 /* ── Right-Side Modules (Glass Capsule Pills) ── */
+#tray {
+    background-color: alpha(@matugen_surface_variant, 0.35);
+    padding: 0 10px;
+    margin: 4px 2px;
+    border-radius: 18px;
+    border: 1px solid alpha(@matugen_outline, 0.15);
+}
+
+#cpu,
 #memory,
+#backlight,
 #pulseaudio,
 #bluetooth,
 #network,
 #battery,
-#clock,
 #custom-power {
     background-color: alpha(@matugen_surface_variant, 0.35);
-    padding: 0 13px;
-    margin: 4px 3px;
+    padding: 0 12px;
+    margin: 4px 2px;
     border-radius: 18px;
     border: 1px solid alpha(@matugen_outline, 0.15);
     color: @matugen_on_surface;
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+#cpu:hover,
 #memory:hover,
+#backlight:hover,
 #pulseaudio:hover,
 #bluetooth:hover,
 #network:hover,
-#battery:hover,
-#clock:hover {
+#battery:hover {
     background-color: alpha(@matugen_surface_variant, 0.65);
     border-color: alpha(@matugen_primary, 0.4);
     box-shadow: 0 2px 8px alpha(@matugen_primary, 0.2);
 }
 
-/* Icons & Specific module accents */
-#memory {
+/* Specific module accents */
+#cpu {
     color: @matugen_secondary;
+}
+
+#memory {
+    color: @matugen_primary;
+}
+
+#backlight {
+    color: @matugen_primary;
 }
 
 #pulseaudio {
@@ -131,7 +191,7 @@ window#waybar.empty #window {
 }
 
 #pulseaudio.muted {
-    color: @matugen_outline;
+    color: alpha(@matugen_outline, 0.8);
 }
 
 #bluetooth {
@@ -139,7 +199,7 @@ window#waybar.empty #window {
 }
 
 #bluetooth.disabled {
-    color: @matugen_outline;
+    color: alpha(@matugen_outline, 0.6);
 }
 
 #network {
@@ -147,7 +207,7 @@ window#waybar.empty #window {
 }
 
 #network.disconnected {
-    color: @matugen_outline;
+    color: alpha(@matugen_outline, 0.6);
 }
 
 #battery {
@@ -158,22 +218,21 @@ window#waybar.empty #window {
     color: #a6e3a1;
 }
 
+#battery.warning:not(.charging) {
+    color: #f9e2af;
+}
+
 #battery.critical:not(.charging) {
     background-color: #ff5555;
     color: #ffffff;
-    animation: blink 0.7s steps(2) infinite;
+    animation: blink 0.8s steps(2) infinite;
 }
 
 @keyframes blink {
     to {
-        background-color: #ffffff;
+        background-color: transparent;
         color: #ff5555;
     }
-}
-
-#clock {
-    color: @matugen_on_surface;
-    font-weight: 700;
 }
 
 /* ── Power Button ── */
@@ -188,5 +247,20 @@ window#waybar.empty #window {
     background-color: #ff5555;
     color: #ffffff;
     border-color: #ff5555;
-    box-shadow: 0 0 10px rgba(255, 85, 85, 0.5);
+    box-shadow: 0 0 12px rgba(255, 85, 85, 0.6);
+}
+
+/* ── Tooltips (Glassmorphic Floating Cards) ── */
+tooltip {
+    background-color: alpha(@matugen_surface, 0.94);
+    border: 1px solid alpha(@matugen_outline, 0.3);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    padding: 6px 12px;
+}
+
+tooltip label {
+    color: @matugen_on_surface;
+    font-size: 12px;
+    font-weight: 500;
 }

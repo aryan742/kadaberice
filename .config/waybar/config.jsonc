@@ -2,9 +2,9 @@
   "layer": "top",
   "position": "bottom",
   "height": 42,
-  "width": 1280,
-  "margin-bottom": 12,
-  "spacing": 8,
+  "width": 1560,
+  "margin-bottom": 10,
+  "spacing": 6,
 
   // Modules Layout
   "modules-left": [
@@ -12,76 +12,156 @@
     "hyprland/workspaces",
     "hyprland/window"
   ],
-  "modules-center": [],
+  "modules-center": [
+    "clock",
+    "mpris"
+  ],
   "modules-right": [
+    "tray",
+    "cpu",
     "memory",
+    "backlight",
     "pulseaudio",
     "bluetooth",
     "network",
     "battery",
-    "clock",
     "custom/power"
   ],
 
-  // Left Modules
+  // ── Left Modules ──
   "custom/launcher": {
-    "format": "▲",
+    "format": "",
     "on-click": "rofi -show drun",
-    "tooltip": false
+    "on-click-right": "~/.config/hypr/scripts/toggle-ags.sh app-launcher",
+    "tooltip-format": "󰀻 Applications\n• Left-Click: Rofi Menu\n• Right-Click: CoverFlow Launcher"
   },
 
   "hyprland/workspaces": {
-    "format": "{icon}",
+    "format": "{name}",
     "on-click": "activate",
     "all-outputs": true,
-    "show-special": false,
-    "format-icons": {
-      "default": "•",
-      "active": "◉",
-      "urgent": ""
+    "sort-by-number": true,
+    "active-only": false,
+    "persistent-workspaces": {
+      "*": [1, 2, 3, 4, 5]
     }
   },
 
   "hyprland/window": {
     "format": "󰘚 {title}",
-    "max-length": 35,
+    "max-length": 30,
     "separate-outputs": true,
     "rewrite": {
-      "": "󰘚 Desktop"
+      "": "󰘚 Desktop",
+      "(.*) — Vivaldi": "󰖟 $1",
+      "(.*) - Kitty": "󰄛 $1",
+      "(.*) - Thunar": "󰉋 $1"
     }
   },
 
-  // Right Modules
+  // ── Center Modules ──
+  "clock": {
+    "timezone": "Asia/Kolkata",
+    "format": "󰥔 {:%I:%M %p}",
+    "format-alt": "󰸗 {:%A, %d %B %Y  •  %I:%M:%S %p}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "interval": 1,
+    "calendar": {
+      "mode": "month",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
+      "format": {
+        "months": "<b>{}</b>",
+        "days": "<b>{}</b>",
+        "weeks": "<b>W{}</b>",
+        "weekdays": "<b>{}</b>",
+        "today": "<b><u>{}</u></b>"
+      }
+    }
+  },
+
+  "mpris": {
+    "format": "{player_icon} {title} - {artist}",
+    "format-paused": "{status_icon} <i>{title}</i>",
+    "player-icons": {
+      "default": "󰝚",
+      "spotify": "󰓇",
+      "vivaldi": "󰖟"
+    },
+    "status-icons": {
+      "paused": "󰏤"
+    },
+    "max-length": 28,
+    "on-click": "playerctl play-pause",
+    "on-scroll-up": "playerctl next",
+    "on-scroll-down": "playerctl previous"
+  },
+
+  // ── Right Modules ──
+  "tray": {
+    "icon-size": 15,
+    "spacing": 8
+  },
+
+  "cpu": {
+    "interval": 3,
+    "format": "󰍛 {usage}%",
+    "tooltip": true,
+    "on-click": "kitty -e btop"
+  },
+
   "memory": {
-    "interval": 5,
+    "interval": 4,
     "format": "󰾆 {percentage}%",
     "tooltip": true,
-    "tooltip-format": "RAM: {used:0.1f}GiB / {total:0.1f}GiB"
+    "tooltip-format": "RAM: {used:0.1f}GiB / {total:0.1f}GiB ({percentage}%)\nSwap: {swapUsed:0.1f}GiB / {swapTotal:0.1f}GiB",
+    "on-click": "kitty -e btop"
+  },
+
+  "backlight": {
+    "device": "intel_backlight",
+    "format": "{icon} {percent}%",
+    "format-icons": ["󰃞", "󰃟", "󰃠"],
+    "on-scroll-up": "brightnessctl set 5%+",
+    "on-scroll-down": "brightnessctl set 5%-",
+    "tooltip": false
   },
 
   "pulseaudio": {
     "format": "{icon} {volume}%",
     "format-muted": "󰝟 Muted",
     "format-icons": {
+      "headphone": "󰋋",
+      "hands-free": "󰋎",
+      "headset": "󰋎",
+      "phone": "󰏲",
+      "portable": "󰏲",
+      "car": "󰄋",
       "default": ["󰕿", "󰖀", "󰕾"]
     },
-    "on-click": "pavucontrol"
+    "on-click": "pavucontrol",
+    "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "on-scroll-up": "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+",
+    "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
   },
 
   "bluetooth": {
-    "format": "󰂯 {status}",
+    "format": "󰂯",
     "format-connected": "󰂱 {device_alias}",
-    "format-disabled": "󰂲 Off",
+    "format-disabled": "󰂲",
     "on-click": "blueman-manager",
-    "tooltip-format": "{controller_alias}\t{controller_address}"
+    "tooltip-format": "󰂯 Bluetooth: {status}\n{controller_alias}\t{controller_address}",
+    "tooltip-format-connected": "󰂱 Connected: {device_alias}\nBattery: {device_battery_percentage}%"
   },
 
   "network": {
-    "format-wifi": " {essid}",
+    "format-wifi": "󰤨 {essid}",
     "format-ethernet": "󰈀 Wired",
-    "format-disconnected": "󰤮 None",
-    "on-click": "nm-connection-editor",
-    "tooltip-format": "IP: {ipaddr}/{cidr}"
+    "format-linked": "󰈀 (No IP)",
+    "format-disconnected": "󰤮 Offline",
+    "tooltip-format": "󰩟 IP: {ipaddr}\n󰞒 Gateway: {gwaddr}\n󰖩 Signal: {signalStrength}% ({signaldBm} dBm)\n󰛳 Frequency: {frequency} MHz",
+    "on-click": "nm-connection-editor"
   },
 
   "battery": {
@@ -92,33 +172,13 @@
     "format": "{icon} {capacity}%",
     "format-charging": "󰂄 {capacity}%",
     "format-plugged": "󰚥 {capacity}%",
+    "format-alt": "{icon} {time}",
     "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
-  },
-
-  "clock": {
-    "timezone": "Asia/Kolkata",
-    "format": " {:%I:%M %p}",
-    "format-alt": " {:%a, %d %b %Y  %I:%M %p}",
-    "tooltip-format": "<tt><small>{calendar}</small></tt>",
-    "interval": 60,
-    "calendar": {
-      "mode": "month",
-      "mode-mon-col": 3,
-      "weeks-pos": "right",
-      "on-scroll": 1,
-      "format": {
-        "months": "<span color='#ffb0ca'><b>{}</b></span>",
-        "days": "<span color='#e8d5e8'><b>{}</b></span>",
-        "weeks": "<span color='#7171ac'><b>W{}</b></span>",
-        "weekdays": "<span color='#c4a8c4'><b>{}</b></span>",
-        "today": "<span color='#ff6ba0'><b><u>{}</u></b></span>"
-      }
-    }
   },
 
   "custom/power": {
     "format": "⏻",
     "on-click": "wlogout",
-    "tooltip": false
+    "tooltip-format": "Power Menu"
   }
 }
