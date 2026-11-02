@@ -1,0 +1,25 @@
+[config]
+reload_apps = true
+
+[templates.waybar]
+input_path = '~/.config/matugen/templates/waybar-colors.css'
+output_path = '~/.config/waybar/colors.css'
+post_hook = 'pkill -USR2 waybar 2>/dev/null || true'
+
+[templates.rofi]
+input_path = '~/.config/matugen/templates/rofi-colors.rasi'
+output_path = '~/.config/rofi/colors.rasi'
+
+[templates.kitty]
+input_path = '~/.config/matugen/templates/kitty-colors.conf'
+output_path = '~/.config/kitty/colors.conf'
+post_hook = 'pkill -USR1 kitty 2>/dev/null || true'
+
+[templates.swaync]
+input_path = '~/.config/matugen/templates/swaync-colors.css'
+output_path = '~/.config/swaync/colors.css'
+post_hook = 'swaync-client -rs 2>/dev/null || true'
+
+[templates.hyprlock]
+input_path = '~/.config/matugen/templates/hyprlock-colors.conf'
+output_path = '~/.config/hypr/colors.conf'

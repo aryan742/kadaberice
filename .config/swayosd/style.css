@@ -1,0 +1,41 @@
+/* ─────────────────────────────────────────────────────────────────
+ * AryanOS — Matugen Dynamic Audio & Brightness OSD Styling
+ * ───────────────────────────────────────────────────────────────── */
+@import url("../waybar/colors.css");
+
+window#osd {
+    background-color: alpha(@matugen_background, 0.88);
+    border: 2px solid @matugen_primary;
+    border-radius: 14px;
+    padding: 12px 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+#osd label {
+    font-family: "Inter", "Roboto", sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: @matugen_on_background;
+}
+
+#osd image {
+    color: @matugen_primary;
+}
+
+progressbar {
+    min-height: 8px;
+    border-radius: 4px;
+    background-color: transparent;
+}
+
+trough {
+    min-height: 8px;
+    border-radius: 4px;
+    background-color: alpha(@matugen_surface_variant, 0.6);
+}
+
+progress {
+    min-height: 8px;
+    border-radius: 4px;
+    background-color: @matugen_primary;
+}
