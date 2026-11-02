@@ -1,91 +1,99 @@
 /* =============================================================================
- * Waybar Stylesheet — Caelestia Light-Plum & Cream Material 3 Aesthetics
+ * Waybar Stylesheet — Modern Dynamic Adaptive Glassmorphism Dock
+ * Powered by Matugen CSS Variables
  * ============================================================================= */
 
 @import "colors.css";
 
-/* Primary Fonts & Base Styling */
 * {
-    font-family: "Inter", "Tiro Devanagari Sanskrit", sans-serif;
+    font-family: "Inter", "JetBrainsMono Nerd Font", sans-serif;
     font-size: 13px;
     font-weight: 600;
+    border: none;
+    border-radius: 0;
 }
 
+/* ── Main Bar Container (Floating Dock with Glassmorphism) ── */
 window#waybar {
-    background: rgba(247, 239, 249, 0.85); /* Exquisite cream-white/rosewater background with high transparency */
-    border: 1px solid rgba(118, 117, 142, 0.15); /* Elegant thin lavender border */
-    border-radius: 24px; /* Floating pill dock */
-    color: #35082e; /* M3 dark plum-black on-surface */
-    transition-property: background-color;
-    transition-duration: 0.5s;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05); /* Premium soft drop shadow */
+    background-color: alpha(@matugen_background, 0.75);
+    border: 1px solid alpha(@matugen_outline, 0.25);
+    border-radius: 24px;
+    color: @matugen_on_surface;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.35);
+    transition: background-color 0.4s ease, border-color 0.4s ease;
 }
 
-/* 🔱 Left Side Logo */
+/* ── App Launcher Pill ── */
 #custom-launcher {
-    color: #68355c; /* M3 Deep Purple/Plum Accent */
-    font-size: 15px;
-    padding: 0 12px;
-    margin: 4px 4px;
-    border-radius: 16px;
-    background: transparent;
-    transition: all 0.25s ease;
+    color: @matugen_primary;
+    font-size: 16px;
+    padding: 0 14px;
+    margin: 4px 2px 4px 6px;
+    border-radius: 18px;
+    background-color: alpha(@matugen_surface_variant, 0.35);
+    border: 1px solid alpha(@matugen_outline, 0.15);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 #custom-launcher:hover {
-    background: rgba(118, 117, 142, 0.12);
-    color: #35082e;
+    background-color: @matugen_primary;
+    color: @matugen_on_primary;
+    box-shadow: 0 0 12px alpha(@matugen_primary, 0.5);
 }
 
-/* 🔴 Workspaces Pill */
+/* ── Workspaces Pill Dock ── */
 #workspaces {
-    background: rgba(118, 117, 142, 0.08); /* Soft light lavender-grey container */
-    padding: 2px 6px;
+    background-color: alpha(@matugen_surface_variant, 0.35);
+    padding: 3px 6px;
     margin: 4px 6px;
-    border-radius: 20px;
-    border: 1px solid rgba(118, 117, 142, 0.06);
+    border-radius: 18px;
+    border: 1px solid alpha(@matugen_outline, 0.15);
 }
 
 #workspaces button {
-    padding: 0;
+    padding: 0 6px;
     margin: 0 2px;
-    min-width: 28px;
-    min-height: 28px;
-    border-radius: 50%; /* Circle layout */
-    color: #76758e; /* Muted lavender-grey */
-    background: transparent;
-    border: none;
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    font-size: 16px; /* For bullet character */
+    min-width: 26px;
+    min-height: 26px;
+    border-radius: 13px;
+    color: @matugen_on_surface_variant;
+    background-color: transparent;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    font-size: 14px;
 }
 
 #workspaces button.active {
-    color: #ffffff; /* White dot inside active pill */
-    background: #4e1e44; /* Deep plum/tertiary active background */
+    color: @matugen_on_primary;
+    background-color: @matugen_primary;
+    min-width: 32px;
+    box-shadow: 0 0 10px alpha(@matugen_primary, 0.4);
 }
 
 #workspaces button.urgent {
-    background: #ffb4ab;
+    background-color: #ffb4ab;
     color: #690005;
 }
 
 #workspaces button:hover {
-    background: rgba(118, 117, 142, 0.15);
-    color: #35082e;
+    background-color: alpha(@matugen_primary, 0.25);
+    color: @matugen_primary;
 }
 
-/* 🏢 Center Module — Active window title (Manrope for Titles) */
+/* ── Window Title Module ── */
 #window {
-    font-family: "Manrope", "Inter", sans-serif;
-    color: #35082e;
-    font-weight: 800;
+    color: @matugen_on_surface;
+    font-weight: 700;
     padding: 0 14px;
     margin: 4px 8px;
-    border-radius: 16px;
-    background: transparent;
+    border-radius: 18px;
+    background-color: transparent;
 }
 
-/* ⚙️ Right Side Modules */
+window#waybar.empty #window {
+    background-color: transparent;
+}
+
+/* ── Right-Side Modules (Glass Capsule Pills) ── */
 #memory,
 #pulseaudio,
 #bluetooth,
@@ -93,13 +101,13 @@ window#waybar {
 #battery,
 #clock,
 #custom-power {
-    background: rgba(118, 117, 142, 0.08); /* Frosted Material 3 container */
-    padding: 0 14px;
+    background-color: alpha(@matugen_surface_variant, 0.35);
+    padding: 0 13px;
     margin: 4px 3px;
-    border-radius: 16px;
-    border: 1px solid rgba(118, 117, 142, 0.06);
-    color: #35082e;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border-radius: 18px;
+    border: 1px solid alpha(@matugen_outline, 0.15);
+    color: @matugen_on_surface;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 #memory:hover,
@@ -108,52 +116,77 @@ window#waybar {
 #network:hover,
 #battery:hover,
 #clock:hover {
-    background: rgba(118, 117, 142, 0.15);
-    border-color: rgba(118, 117, 142, 0.25);
+    background-color: alpha(@matugen_surface_variant, 0.65);
+    border-color: alpha(@matugen_primary, 0.4);
+    box-shadow: 0 2px 8px alpha(@matugen_primary, 0.2);
 }
 
+/* Icons & Specific module accents */
 #memory {
-    color: #7171ac; /* Muted primary blue-lavender */
+    color: @matugen_secondary;
 }
 
 #pulseaudio {
-    color: #68355c; /* Warm plum */
+    color: @matugen_primary;
+}
+
+#pulseaudio.muted {
+    color: @matugen_outline;
 }
 
 #bluetooth {
-    color: #76758e; /* Muted lavender-grey */
+    color: @matugen_primary;
+}
+
+#bluetooth.disabled {
+    color: @matugen_outline;
 }
 
 #network {
-    color: #7171ac; /* Muted primary blue-lavender */
+    color: @matugen_secondary;
+}
+
+#network.disconnected {
+    color: @matugen_outline;
 }
 
 #battery {
-    color: #68355c; /* Warm plum */
+    color: @matugen_primary;
 }
 
 #battery.charging, #battery.plugged {
-    color: #7171ac; /* Muted primary blue-lavender when charging */
+    color: #a6e3a1;
 }
 
 #battery.critical:not(.charging) {
-    background-color: #ffb4ab;
-    color: #690005;
+    background-color: #ff5555;
+    color: #ffffff;
+    animation: blink 0.7s steps(2) infinite;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #ff5555;
+    }
 }
 
 #clock {
-    color: #35082e; /* M3 dark plum-black */
-    font-weight: bold;
+    color: @matugen_on_surface;
+    font-weight: 700;
 }
 
+/* ── Power Button ── */
 #custom-power {
-    color: #690005; /* Soft warning crimson */
+    color: @matugen_primary;
     font-size: 14px;
-    padding-right: 14px;
+    padding: 0 12px;
+    margin-right: 6px;
 }
 
 #custom-power:hover {
-    background: rgba(105, 0, 5, 0.12);
-    border-color: rgba(105, 0, 5, 0.25);
-    color: #690005;
+    background-color: #ff5555;
+    color: #ffffff;
+    border-color: #ff5555;
+    box-shadow: 0 0 10px rgba(255, 85, 85, 0.5);
 }

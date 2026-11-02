@@ -1,11 +1,11 @@
 /* Matugen Generated Waybar Palette */
-@define-color matugen_primary #f5bc6f;
-@define-color matugen_on_primary #452b00;
-@define-color matugen_primary_container #633f00;
-@define-color matugen_on_primary_container #ffddb4;
+@define-color matugen_primary #f3bd6e;
+@define-color matugen_on_primary #442b00;
+@define-color matugen_primary_container #624000;
+@define-color matugen_on_primary_container #ffddb1;
 
-@define-color matugen_secondary #dec2a2;
-@define-color matugen_on_secondary #3e2d16;
+@define-color matugen_secondary #ddc2a1;
+@define-color matugen_on_secondary #3e2e16;
 
 @define-color matugen_surface #18120b;
 @define-color matugen_on_surface #ede0d4;
@@ -14,4 +14,4 @@
 
 @define-color matugen_background #18120b;
 @define-color matugen_on_background #ede0d4;
-@define-color matugen_outline #9c8f80;
+@define-color matugen_outline #9b8f80;

@@ -1,0 +1,61 @@
+/* ─────────────────────────────────────────────────────────────────
+ * AryanOS — Matugen Dynamic Glassmorphism Wlogout Stylesheet
+ * ───────────────────────────────────────────────────────────────── */
+
+@import "../waybar/colors.css";
+
+* {
+    font-family: "Inter", "JetBrainsMono Nerd Font", sans-serif;
+    background-image: none;
+    box-shadow: none;
+}
+
+window {
+    background-color: alpha(@matugen_background, 0.85);
+}
+
+button {
+    border-radius: 24px;
+    border: 2px solid alpha(@matugen_outline, 0.25);
+    color: @matugen_on_surface;
+    background-color: alpha(@matugen_surface_variant, 0.45);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 28%;
+    margin: 16px;
+    font-size: 15px;
+    font-weight: 700;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+button:focus, button:active, button:hover {
+    background-color: @matugen_primary;
+    color: @matugen_on_primary;
+    border-color: @matugen_primary;
+    box-shadow: 0 0 20px alpha(@matugen_primary, 0.5);
+    outline-style: none;
+}
+
+#lock {
+    background-image: image(url("/usr/share/wlogout/icons/lock.png"));
+}
+
+#logout {
+    background-image: image(url("/usr/share/wlogout/icons/logout.png"));
+}
+
+#suspend {
+    background-image: image(url("/usr/share/wlogout/icons/suspend.png"));
+}
+
+#hibernate {
+    background-image: image(url("/usr/share/wlogout/icons/hibernate.png"));
+}
+
+#shutdown {
+    background-image: image(url("/usr/share/wlogout/icons/shutdown.png"));
+}
+
+#reboot {
+    background-image: image(url("/usr/share/wlogout/icons/reboot.png"));
+}

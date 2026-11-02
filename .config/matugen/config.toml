@@ -19,3 +19,8 @@ post_hook = 'pkill -USR1 kitty 2>/dev/null || true'
 [templates.hyprlock]
 input_path = '~/.config/matugen/templates/hyprlock-colors.conf'
 output_path = '~/.config/hypr/colors.conf'
+
+[templates.hypr]
+input_path = '~/.config/matugen/templates/hypr-colors.lua'
+output_path = '~/.config/hypr/colors.lua'
+post_hook = 'hyprctl reload 2>/dev/null || true'

@@ -1,9 +1,102 @@
-/* Rofi Master Config — Imports Matugen colors.rasi */
+/* =============================================================================
+ * Rofi Master Configuration — Modern Glassmorphism App Launcher
+ * Powered by Matugen Dynamic Colors
+ * ============================================================================= */
+
 @import "colors.rasi"
 
 configuration {
-    modi: "drun,run,window";
+    modi: "drun,run,filebrowser,window";
     show-icons: true;
     icon-theme: "BeautyLine";
+    font: "Inter 11";
+    drun-display-format: "{name}";
+    display-drun: "🔍 Apps";
+    display-run: "⚡ Run";
+    display-window: "🪟 Windows";
+    matching: "fuzzy";
+    scroll-method: 0;
+    disable-history: false;
+}
+
+window {
+    transparency: "real";
+    background-color: @matugen-background;
+    text-color: @matugen-on-background;
+    border: 2px;
+    border-color: @matugen-primary;
+    border-radius: 20px;
+    width: 680px;
+    location: center;
+    anchor: center;
+    padding: 0px;
+}
+
+mainbox {
+    background-color: transparent;
+    spacing: 14px;
+    padding: 24px;
+    children: [ "inputbar", "listview" ];
+}
+
+inputbar {
+    background-color: @matugen-surface;
+    text-color: @matugen-on-surface;
+    border-radius: 14px;
+    padding: 12px 18px;
+    spacing: 12px;
+    children: [ "prompt", "entry" ];
+}
+
+prompt {
+    background-color: transparent;
+    text-color: @matugen-primary;
+    font: "Inter Bold 11";
+}
+
+entry {
+    background-color: transparent;
+    text-color: @matugen-on-surface;
+    placeholder: "Search applications...";
+    placeholder-color: @matugen-outline;
+    cursor: text;
+}
+
+listview {
+    background-color: transparent;
+    columns: 2;
+    lines: 7;
+    spacing: 8px;
+    cycle: true;
+    dynamic: true;
+    layout: vertical;
+}
+
+element {
+    background-color: transparent;
+    text-color: @matugen-on-background;
+    border-radius: 12px;
+    padding: 10px 14px;
+    spacing: 12px;
+    cursor: pointer;
+}
+
+element selected {
+    background-color: @matugen-primary;
+    text-color: @matugen-on-primary;
+}
+
+element-icon {
+    background-color: transparent;
+    size: 32px;
+    cursor: inherit;
+}
+
+element-text {
+    background-color: transparent;
+    text-color: inherit;
+    highlight: inherit;
+    cursor: inherit;
+    vertical-align: 0.5;
     font: "Inter 11";
 }

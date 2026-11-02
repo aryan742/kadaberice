@@ -111,3 +111,13 @@ hl.layer_rule({
     match = { namespace = "dunst" },
     blur  = true,
 })
+hl.layer_rule({
+    name  = "blur-rofi",
+    match = { namespace = "rofi" },
+    blur  = true,
+})
+hl.layer_rule({
+    name  = "blur-wlogout",
+    match = { namespace = "wlogout" },
+    blur  = true,
+})
