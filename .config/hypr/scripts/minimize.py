@@ -55,12 +55,6 @@ def run_hyprctl(cmd, is_json=True):
     except Exception:
         return None
 
-def dispatch(cmd_str):
-    try:
-        subprocess.run(["hyprctl", "dispatch"] + cmd_str.split(), check=False)
-    except Exception:
-        pass
-
 def notify_waybar():
     try:
         subprocess.run(["pkill", "-RTMIN+8", "waybar"], check=False)
@@ -74,7 +68,6 @@ def load_minimized():
         with open(CACHE_FILE, "r") as f:
             data = json.load(f)
             if isinstance(data, list):
-                # Validate that client windows still exist in Hyprland
                 clients = run_hyprctl("clients") or []
                 live_addresses = {c.get("address") for c in clients if c.get("address")}
                 valid_data = [w for w in data if w.get("address") in live_addresses]
@@ -100,7 +93,7 @@ def minimize_active():
     
     ws_name = active.get("workspace", {}).get("name", "")
     if ws_name.startswith("special:"):
-        return  # already in a special workspace
+        return
 
     addr = active["address"]
     cls = active.get("class", "")
@@ -108,7 +101,6 @@ def minimize_active():
     prev_ws = active.get("workspace", {}).get("id", 1)
 
     minimized = load_minimized()
-    # avoid duplicates
     minimized = [w for w in minimized if w.get("address") != addr]
     minimized.append({
         "address": addr,
@@ -118,7 +110,32 @@ def minimize_active():
     })
     save_minimized(minimized)
 
-    dispatch(f"movetoworkspacesilent special:minimized,address:{addr}")
+    # Unfullscreen active window if needed
+    if active.get("fullscreen", 0) != 0:
+        subprocess.run(["hyprctl", "eval", "hl.dispatch(hl.dsp.window.fullscreen(0))"], check=False, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+    # Move active window to special:minimized
+    subprocess.run([
+        "hyprctl", "eval",
+        'hl.dispatch(hl.dsp.window.move({ workspace = "special:minimized", silent = true }))'
+    ], check=False, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+    # Transfer focus to another window on the current workspace or desktop
+    clients = run_hyprctl("clients") or []
+    other_windows = [
+        c for c in clients 
+        if c.get("address") != addr and not c.get("workspace", {}).get("name", "").startswith("special:")
+    ]
+    same_ws = [c for c in other_windows if c.get("workspace", {}).get("id") == prev_ws]
+    target_focus = (same_ws or other_windows)[-1] if (same_ws or other_windows) else None
+
+    if target_focus and target_focus.get("address"):
+        target_addr = target_focus["address"]
+        subprocess.run([
+            "hyprctl", "eval",
+            f'hl.dispatch(hl.dsp.focus({{ window = "address:{target_addr}" }}))'
+        ], check=False, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
     notify_waybar()
 
 def restore_window(target_addr=None):
@@ -137,13 +154,17 @@ def restore_window(target_addr=None):
     minimized = [w for w in minimized if w.get("address") != target["address"]]
     save_minimized(minimized)
 
-    # Get active workspace to restore window to
     active_ws = run_hyprctl("activeworkspace")
-    target_ws = active_ws.get("id", target.get("prev_ws", 1)) if active_ws else target.get("prev_ws", 1)
-
+    target_ws = str(active_ws.get("id", target.get("prev_ws", 1)) if active_ws else target.get("prev_ws", 1))
     addr = target["address"]
-    dispatch(f"movetoworkspace {target_ws},address:{addr}")
-    dispatch(f"focuswindow address:{addr}")
+
+    # Focus window, restore to current workspace, and focus
+    lua_code = (
+        f'hl.dispatch(hl.dsp.focus({{ window = "address:{addr}" }})) '
+        f'hl.dispatch(hl.dsp.window.move({{ workspace = "{target_ws}", silent = false }})) '
+        f'hl.dispatch(hl.dsp.focus({{ window = "address:{addr}" }}))'
+    )
+    subprocess.run(["hyprctl", "eval", lua_code], check=False, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     notify_waybar()
 
 def toggle():
@@ -193,7 +214,7 @@ def status():
     count = len(minimized)
     
     titles = [f"• {get_icon(w.get('class'))} {w.get('title', 'Window')}" for w in minimized]
-    tooltip = f"<b>Minimized Windows ({count})</b>\n" + "\n".join(titles) + "\n\n<i>Left-click to restore last\nRight-click for menu</i>"
+    tooltip = f"<b>Minimized Windows ({count})</b>\n" + "\n".join(titles) + "\n\n<i>Left-click to restore\nRight-click for menu</i>"
 
     out = {
         "text": f"󰍏 {icon_str}",

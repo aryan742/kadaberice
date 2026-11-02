@@ -1,18 +1,6 @@
 -- ─────────────────────────────────────────────────────────────────
 -- AryanOS — Hyprland Plugins Configuration (Lua)
 -- ─────────────────────────────────────────────────────────────────
--- NOTE: hyprexpo plugin config is ready but the plugin itself is not
--- loaded here via plugins.lua — it must be loaded via hyprpm.
--- Run the install commands below first, then uncomment the plugin block.
---
--- ── INSTALL COMMANDS (run in terminal as user, NOT root) ──────────
---   sudo pacman -S cmake
---   hyprpm update
---   hyprpm add https://github.com/hyprwm/hyprland-plugins
---   hyprpm enable hyprexpo
---   hyprpm reload
---
--- ── AFTER INSTALLATION, uncomment below ──────────────────────────
 
 hl.config({
     plugin = {
@@ -33,16 +21,32 @@ hl.config({
             bar_buttons_alignment = "right",
             bar_padding = 10,
             bar_button_padding = 8,
-            on_double_click = "hyprctl dispatch fullscreen 1",
-
-            -- 3 Titlebar Buttons: Close (Red), Fullscreen (Green), Minimize (Yellow)
-            ["hyprbars-button"] = {
-                "rgb(ff5555), 10, 󰖭, hyprctl dispatch killactive",
-                "rgb(50fa7b), 10, 󰍉, hyprctl dispatch fullscreen 1",
-                "rgb(f1fa8c), 10, 󰍏, ~/.config/hypr/scripts/minimize.sh minimize",
-            },
+            on_double_click = "hyprctl eval 'hl.dispatch(hl.dsp.window.fullscreen(1))'",
         },
     },
 })
 
-
+-- Register Titlebar Buttons: Close (Red), Fullscreen (Green), Minimize (Yellow)
+if hl.plugin and hl.plugin.hyprbars and hl.plugin.hyprbars.add_button then
+    hl.plugin.hyprbars.add_button({
+        bg_color = "rgb(ff5555)",
+        fg_color = "rgb(12131a)",
+        size = 11,
+        icon = "󰖭",
+        action = "hyprctl eval 'hl.dispatch(hl.dsp.window.close())'"
+    })
+    hl.plugin.hyprbars.add_button({
+        bg_color = "rgb(50fa7b)",
+        fg_color = "rgb(12131a)",
+        size = 11,
+        icon = "󰍉",
+        action = "hyprctl eval 'hl.dispatch(hl.dsp.window.fullscreen(1))'"
+    })
+    hl.plugin.hyprbars.add_button({
+        bg_color = "rgb(f1fa8c)",
+        fg_color = "rgb(12131a)",
+        size = 11,
+        icon = "󰍏",
+        action = "python3 ~/.config/hypr/scripts/minimize.py minimize"
+    })
+end
