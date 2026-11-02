@@ -3,6 +3,11 @@
 # Hyprland Plugin Load & Auto-Update Script
 # ─────────────────────────────────────────────────────────────────
 
+# Exit immediately if hyprpm is not installed or enabled
+if ! command -v hyprpm &>/dev/null; then
+    exit 0
+fi
+
 # Wait for Hyprland desktop environment to settle on boot
 sleep 2
 

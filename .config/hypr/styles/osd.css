@@ -1,6 +1,6 @@
 /* =============================================================================
- * AryanOS — Premium Material 3 Audio & Brightness OSD
- * Exact Layout Anatomy: 320px x 56px, 18px Corner Radius, Inter Font
+ * AryanOS — Dynamic Matugen Glassmorphic Audio & Brightness OSD
+ * Exact Layout Anatomy: 320px x 54px, 20px Corner Radius, Inter & JetBrains Font
  * ============================================================================= */
 @import url("../../waybar/colors.css");
 
@@ -9,53 +9,53 @@ window#osd-window {
 }
 
 #osd-container {
-    background: rgba(247, 239, 249, 0.94); /* Cream-white / rosewater background matching Waybar */
-    border: 1px solid alpha(@matugen_outline, 0.20); /* Thin subtle Matugen accent border */
-    border-radius: 18px; /* Corner Radius: 18px */
-    padding: 0 12px 0 14px; /* Left: 14px, Right: 12px padding */
+    background-color: alpha(@matugen_background, 0.85);
+    border: 1px solid alpha(@matugen_outline, 0.25);
+    border-radius: 20px;
+    padding: 0 16px;
     min-width: 320px;
-    min-height: 56px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08); /* Soft drop shadow */
+    min-height: 52px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 #osd-icon {
-    font-family: "Inter", "Manrope", sans-serif;
-    font-size: 18px; /* 18px monochrome symbolic icon */
-    color: #35082e; /* M3 dark plum Waybar text color */
-    margin-right: 8px; /* Spacing: 8px */
+    font-family: "JetBrainsMono Nerd Font", "Inter", sans-serif;
+    font-size: 20px;
+    color: @matugen_primary;
+    margin-right: 12px;
 }
 
 #osd-progress {
-    min-height: 4px;
-    border-radius: 4px;
+    min-height: 6px;
+    border-radius: 6px;
     background-color: transparent;
 }
 
 #osd-progress trough {
-    min-height: 4px;
-    border-radius: 4px;
-    background-color: alpha(@matugen_surface_variant, 0.15); /* Soft background container */
+    min-height: 6px;
+    border-radius: 6px;
+    background-color: alpha(@matugen_surface_variant, 0.45);
 }
 
 #osd-progress progress {
-    min-height: 4px;
-    border-radius: 4px;
-    background-color: @matugen_primary; /* Matugen primary active fill */
+    min-height: 6px;
+    border-radius: 6px;
+    background-color: @matugen_primary;
 }
 
 #osd-value {
-    font-family: "Inter", sans-serif;
-    font-size: 13px; /* 13px Inter Medium */
-    font-weight: 500; /* Medium weight */
-    color: #35082e; /* M3 dark plum Waybar text color */
-    margin-left: 8px; /* Spacing: 8px */
-    min-width: 36px;
+    font-family: "Inter", "JetBrainsMono Nerd Font", sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: @matugen_on_surface;
+    margin-left: 12px;
+    min-width: 38px;
 }
 
 #osd-text {
-    font-family: "Inter", sans-serif;
-    font-size: 13px; /* 13px Inter Medium */
-    font-weight: 500; /* Medium weight */
-    color: #35082e; /* M3 dark plum Waybar text color */
-    margin-left: 8px;
+    font-family: "Inter", "JetBrainsMono Nerd Font", sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: @matugen_on_surface;
+    margin-left: 12px;
 }

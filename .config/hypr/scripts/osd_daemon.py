@@ -29,6 +29,7 @@ class AudioOSDWindow(Gtk.Window):
 
         # Setup Layer Shell
         GtkLayerShell.init_for_window(self)
+        GtkLayerShell.set_namespace(self, "osd")
         GtkLayerShell.set_layer(self, GtkLayerShell.Layer.OVERLAY)
         GtkLayerShell.set_anchor(self, GtkLayerShell.Edge.TOP, True)
         GtkLayerShell.set_margin(self, GtkLayerShell.Edge.TOP, 12)

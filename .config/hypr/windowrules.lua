@@ -102,9 +102,10 @@ hl.window_rule({
 
 -- ── 8. System Layer Rules (Glassmorphism & Blur) ──────────────────
 hl.layer_rule({
-    name  = "blur-waybar",
-    match = { namespace = "waybar" },
-    blur  = true,
+    name         = "blur-waybar",
+    match        = { namespace = "waybar" },
+    blur         = true,
+    ignore_alpha = 0.5,
 })
 hl.layer_rule({
     name  = "blur-dunst",
@@ -120,4 +121,10 @@ hl.layer_rule({
     name  = "blur-wlogout",
     match = { namespace = "wlogout" },
     blur  = true,
+})
+hl.layer_rule({
+    name         = "blur-osd",
+    match        = { namespace = "osd" },
+    blur         = true,
+    ignore_alpha = 0.5,
 })

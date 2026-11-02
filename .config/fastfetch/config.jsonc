@@ -39,9 +39,25 @@
       "keyColor": "36"
     },
     {
+      "type": "display",
+      "key": "󰍹 Display",
+      "keyColor": "34",
+      "compactType": "original"
+    },
+    {
       "type": "terminal",
       "key": "󰞷 Terminal",
       "keyColor": "31"
+    },
+    {
+      "type": "shell",
+      "key": "󰞷 Shell",
+      "keyColor": "35"
+    },
+    {
+      "type": "font",
+      "key": "󰉼 Font",
+      "keyColor": "36"
     },
     {
       "type": "cpu",
@@ -59,9 +75,16 @@
       "keyColor": "32"
     },
     {
-      "type": "battery",
-      "key": "󰂄 Battery",
-      "keyColor": "33"
+      "type": "disk",
+      "key": "󰋊 Disk (/)",
+      "keyColor": "33",
+      "folders": "/"
+    },
+    {
+      "type": "localip",
+      "key": "󰩟 Local IP",
+      "keyColor": "36",
+      "showIpv6": false
     },
     "break",
     {

@@ -1,0 +1,59 @@
+# ─────────────────────────────────────────────────────────────────
+# AryanOS — Alacritty Fallback Terminal Configuration
+# ─────────────────────────────────────────────────────────────────
+
+[general]
+live_config_reload = true
+
+[window]
+padding = { x = 14, y = 14 }
+opacity = 0.90
+decorations = "None"
+dynamic_padding = true
+
+[font]
+size = 11.5
+normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
+bold = { family = "JetBrainsMono Nerd Font", style = "Bold" }
+italic = { family = "JetBrainsMono Nerd Font", style = "Italic" }
+bold_italic = { family = "JetBrainsMono Nerd Font", style = "Bold Italic" }
+
+[cursor]
+style = { shape = "Beam", blinking = "On" }
+blink_interval = 500
+
+[scrolling]
+history = 5000
+multiplier = 3
+
+[colors.primary]
+background = "#18120b"
+foreground = "#ede0d4"
+
+[colors.cursor]
+text = "#442b00"
+cursor = "#f3bd6e"
+
+[colors.selection]
+text = "#ffddb1"
+background = "#624000"
+
+[colors.normal]
+black   = "#18120b"
+red     = "#ffb4ab"
+green   = "#f3bd6e"
+yellow  = "#b7cea2"
+blue    = "#ddc2a1"
+magenta = "#624000"
+cyan    = "#9b8f80"
+white   = "#ede0d4"
+
+[colors.bright]
+black   = "#4f4539"
+red     = "#ffb4ab"
+green   = "#f3bd6e"
+yellow  = "#b7cea2"
+blue    = "#ddc2a1"
+magenta = "#624000"
+cyan    = "#9b8f80"
+white   = "#ede0d4"

@@ -14,14 +14,15 @@
 --
 -- ── AFTER INSTALLATION, uncomment below ──────────────────────────
 
--- hl.config({
---     plugin = {
---         hyprexpo = {
---             columns = 3,
---             gaps_in = 10,
---             gaps_out = 15,
---             bg_col = "rgba(0, 0, 0, 0.85)",
---             workspace_method = "center current",
---         },
---     },
--- })
+hl.config({
+    plugin = {
+        hyprexpo = {
+            columns = 3,
+            gaps_in = 10,
+            gaps_out = 15,
+            bg_col = "rgba(0, 0, 0, 0.85)",
+            workspace_method = "center current",
+        },
+    },
+})
+

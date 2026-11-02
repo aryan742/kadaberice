@@ -10,8 +10,9 @@ hl.on("hyprland.start", function()
     -- Polkit (Authentication UI agent)
     hl.exec_cmd("/usr/lib/polkit-kde-authentication-agent-1")
 
-    -- Desktop Status Bar & UI
+    -- Desktop Status Bar, Idle Daemon & UI
     hl.exec_cmd("waybar")
+    hl.exec_cmd("hypridle")
     hl.exec_cmd("gjs -m ~/.config/ags/app.js")
     hl.exec_cmd("python3 ~/.config/hypr/scripts/osd_daemon.py")
 
@@ -28,13 +29,13 @@ hl.on("hyprland.start", function()
     -- Window Switcher (Snappy Switcher)
     hl.exec_cmd("snappy-switcher --daemon")
 
+    -- Hyprland Plugins (hyprpm reload & auto-recovery)
+    hl.exec_cmd("~/.config/hypr/scripts/hyprpm-auto-update.sh &")
+
     -- Cursor & Theme Integration
     hl.exec_cmd("hyprctl setcursor Bibata-Modern-Ice 24")
     hl.exec_cmd("gsettings set org.gnome.desktop.interface cursor-theme 'Bibata-Modern-Ice'")
     hl.exec_cmd("gsettings set org.gnome.desktop.interface cursor-size 24")
     hl.exec_cmd("gsettings set org.gnome.desktop.interface gtk-theme 'Colloid-Dark'")
     hl.exec_cmd("gsettings set org.gnome.desktop.interface icon-theme 'BeautyLine'")
-
-    -- Plugins Reload (hyprpm self-healing integration)
-    hl.exec_cmd("~/.config/hypr/scripts/hyprpm-auto-update.sh &")
 end)

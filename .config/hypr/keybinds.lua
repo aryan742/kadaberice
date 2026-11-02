@@ -8,8 +8,9 @@ local screenshot = "~/.config/hypr/scripts/screenshot.sh"
 local osd = "~/.config/hypr/scripts/osd_control.sh"
 
 -- ── Application Binds ────────────────────────────────────────────
-hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd("kitty"))
-hl.bind(mainMod .. " + E", hl.dsp.exec_cmd("thunar"))
+hl.bind(mainMod .. " + Q",      hl.dsp.exec_cmd("kitty"))
+hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd("alacritty"))
+hl.bind(mainMod .. " + E",      hl.dsp.exec_cmd("thunar"))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("rofi -show drun"))
 hl.bind(mainMod .. " + C", hl.dsp.window.close())
 hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exit())
@@ -106,7 +107,11 @@ hl.bind("ALT + SHIFT + Tab",       hl.dsp.exec_cmd("snappy-switcher prev"))
 hl.bind(mainMod .. " + Space",     hl.dsp.exec_cmd("~/.config/hypr/scripts/toggle-ags.sh app-launcher"))
 hl.bind(mainMod .. " + Tab",       hl.dsp.exec_cmd("~/.config/hypr/scripts/toggle-ags.sh workspace-carousel"))
 hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("~/.config/hypr/scripts/toggle-ags.sh wallpaper-carousel"))
-hl.bind(mainMod .. " + grave",     hl.dsp.exec_cmd("hyprctl dispatch hyprexpo:expo toggle"))
+hl.bind(mainMod .. " + grave", function()
+    if hl.plugin and hl.plugin.hyprexpo and hl.plugin.hyprexpo.expo then
+        hl.plugin.hyprexpo.expo("toggle")
+    end
+end)
 
 -- ── Notification Controls (Dunst) ────────────────────────────────
 hl.bind(mainMod .. " + Escape",         hl.dsp.exec_cmd("dunstctl close"))
