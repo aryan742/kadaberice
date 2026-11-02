@@ -1,0 +1,79 @@
+# ─────────────────────────────────────────────────────────────────
+# AryanOS — Dynamic Matugen Glassmorphism Dunst Configuration
+# ─────────────────────────────────────────────────────────────────
+
+[global]
+    # Font styling
+    font = Inter 10.5
+
+    # Display settings
+    monitor = 0
+    follow = mouse
+    width = (320, 420)
+    height = 140
+    origin = top-right
+    offset = 16x16
+    scale = 0
+    notification_limit = 5
+
+    # Progress bar styling
+    progress_bar = true
+    progress_bar_height = 5
+    progress_bar_frame_width = 0
+    progress_bar_min_width = 180
+    progress_bar_max_width = 380
+    progress_bar_corner_radius = 3
+
+    # Borders, outlines and glass curves
+    frame_width = 2
+    separator_color = frame
+    corner_radius = 14
+
+    # Icon handling
+    enable_recursive_icon_lookup = true
+    icon_theme = "BeautyLine"
+    icon_position = left
+    min_icon_size = 32
+    max_icon_size = 48
+
+    # Layout & Behavior
+    gap_size = 8
+    padding = 14
+    horizontal_padding = 16
+    text_icon_padding = 12
+    line_height = 4
+    markup = full
+    format = "<span weight='bold' size='large'>%s</span>\n%b"
+    alignment = left
+    show_age_threshold = 60
+    ellipsize = middle
+    ignore_newline = no
+    stack_duplicates = true
+    hide_duplicate_count = false
+    show_indicators = yes
+
+    # Mouse actions
+    mouse_left_click = close_current
+    mouse_middle_click = do_action, close_current
+    mouse_right_click = close_all
+
+[urgency_low]
+    background = "{{colors.surface.default.hex}}cc"
+    foreground = "{{colors.on_surface.default.hex}}"
+    frame_color = "{{colors.outline.default.hex}}"
+    highlight = "{{colors.secondary.default.hex}}"
+    timeout = 4
+
+[urgency_normal]
+    background = "{{colors.surface.default.hex}}dd"
+    foreground = "{{colors.on_surface.default.hex}}"
+    frame_color = "{{colors.primary.default.hex}}"
+    highlight = "{{colors.primary.default.hex}}"
+    timeout = 6
+
+[urgency_critical]
+    background = "{{colors.surface.default.hex}}ee"
+    foreground = "{{colors.on_surface.default.hex}}"
+    frame_color = "#ff5555"
+    highlight = "#ff5555"
+    timeout = 0

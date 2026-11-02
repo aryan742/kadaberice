@@ -108,6 +108,11 @@ hl.bind(mainMod .. " + Tab",       hl.dsp.exec_cmd("~/.config/hypr/scripts/toggl
 hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("~/.config/hypr/scripts/toggle-ags.sh wallpaper-carousel"))
 hl.bind(mainMod .. " + grave",     hl.dsp.exec_cmd("hyprctl dispatch hyprexpo:expo toggle"))
 
+-- ── Notification Controls (Dunst) ────────────────────────────────
+hl.bind(mainMod .. " + Escape",         hl.dsp.exec_cmd("dunstctl close"))
+hl.bind(mainMod .. " + SHIFT + Escape", hl.dsp.exec_cmd("dunstctl close-all"))
+hl.bind(mainMod .. " + SHIFT + grave",  hl.dsp.exec_cmd("dunstctl history-pop"))
+
 -- ── Presentation & Display Toggle ────────────────────────────────
 hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("~/.config/hypr/scripts/display_toggle.sh"))
 hl.bind("XF86Display",             hl.dsp.exec_cmd("~/.config/hypr/scripts/display_toggle.sh"))
