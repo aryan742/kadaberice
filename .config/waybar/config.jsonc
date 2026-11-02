@@ -10,6 +10,7 @@
   "modules-left": [
     "custom/launcher",
     "hyprland/workspaces",
+    "custom/minimized",
     "hyprland/window"
   ],
   "modules-center": [],
@@ -41,6 +42,17 @@
       "active": "◉",
       "urgent": ""
     }
+  },
+
+  "custom/minimized": {
+    "format": "{}",
+    "exec": "python3 ~/.config/hypr/scripts/minimize.py status",
+    "return-type": "json",
+    "on-click": "python3 ~/.config/hypr/scripts/minimize.py restore",
+    "on-click-right": "python3 ~/.config/hypr/scripts/minimize.py menu",
+    "signal": 8,
+    "interval": 2,
+    "tooltip": true
   },
 
   "hyprland/window": {

@@ -15,8 +15,8 @@ hl.curve("easeOutQuad", { type = "bezier", points = { {0.25, 1}, {0.5, 1}  } })
 
 -- Window Transitions
 hl.animation({ leaf = "windows",     enabled = true, speed = 3.5, bezier = "fluidDecel", style = "slide" })
-hl.animation({ leaf = "windowsIn",   enabled = true, speed = 3.5, bezier = "fluidDecel", style = "slide" })
-hl.animation({ leaf = "windowsOut",  enabled = true, speed = 3.0, bezier = "fluidDecel", style = "slide" })
+hl.animation({ leaf = "windowsIn",   enabled = true, speed = 3.5, bezier = "fluidDecel", style = "slide bottom" })
+hl.animation({ leaf = "windowsOut",  enabled = true, speed = 3.0, bezier = "fluidDecel", style = "slide bottom" })
 hl.animation({ leaf = "windowsMove", enabled = true, speed = 3.5, bezier = "fluidDecel" })
 
 -- Fade Effects

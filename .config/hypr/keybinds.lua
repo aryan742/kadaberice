@@ -26,6 +26,9 @@ hl.bind(mainMod .. " + S",         hl.dsp.layout("togglesplit"))
 hl.bind(mainMod .. " + Y",         hl.dsp.exec_cmd("hyprctl dispatch pin"))               -- Pin floating window across workspaces
 hl.bind(mainMod .. " + X",         hl.dsp.exec_cmd("hyprctl dispatch centerwindow"))      -- Center floating window on screen
 hl.bind(mainMod .. " + B",         hl.dsp.exec_cmd("hyprctl dispatch focuscurrentorlast")) -- Toggle focus between current and last window
+hl.bind(mainMod .. " + minus",     hl.dsp.exec_cmd("~/.config/hypr/scripts/minimize.sh toggle"))          -- Minimize/Restore window
+hl.bind(mainMod .. " + Z",         hl.dsp.exec_cmd("~/.config/hypr/scripts/minimize.sh toggle"))          -- Minimize/Restore window
+hl.bind(mainMod .. " + SHIFT + Z", hl.dsp.exec_cmd("~/.config/hypr/scripts/minimize.sh menu"))            -- Select minimized window menu
 
 -- ── Native Window Grouping (Tabs) ────────────────────────────────
 hl.bind(mainMod .. " + G",         hl.dsp.exec_cmd("hyprctl dispatch togglegroup"))       -- Group/Ungroup windows into tabs
