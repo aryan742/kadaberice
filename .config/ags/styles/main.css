@@ -7,7 +7,6 @@
 * {
     font-family: "Inter", "Tiro Devanagari Sanskrit", sans-serif;
     color: #F5F0E6;
-    transition: all 0.2s ease-out;
 }
 
 window {
@@ -42,6 +41,7 @@ window {
     background-color: transparent;
     color: rgba(245, 240, 230, 0.65);
     border: none;
+    transition: background-color 0.15s ease-out, color 0.15s ease-out;
 }
 
 .nav-item:hover {
@@ -54,6 +54,33 @@ window {
     background-color: rgba(196, 168, 196, 0.35);
     border: 1px solid rgba(255, 176, 202, 0.7);
     box-shadow: 0 0 12px rgba(255, 176, 202, 0.3);
+}
+
+/* ── Wallpaper Category Buttons ────────────────────────────────── */
+.category-btn {
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 18px;
+    margin: 0 4px;
+    border-radius: 20px;
+    background-color: rgba(22, 20, 26, 0.75);
+    color: rgba(245, 240, 230, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background-color 0.15s ease-out, color 0.15s ease-out, border-color 0.15s ease-out;
+}
+
+.category-btn:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+.category-btn.active {
+    color: #ffffff;
+    background-color: @matugen_primary;
+    border-color: @matugen_primary;
+    font-weight: 700;
+    box-shadow: 0 0 14px rgba(243, 189, 110, 0.4);
 }
 
 .search-pill-entry {

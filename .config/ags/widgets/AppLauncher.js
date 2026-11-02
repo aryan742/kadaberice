@@ -194,7 +194,7 @@ export default function AppLauncher(app) {
             return
         }
 
-        animId = GLib.timeout_add(GLib.PRIORITY_HIGH, 8, () => {
+        animId = GLib.timeout_add(GLib.PRIORITY_HIGH, 16, () => {
             const now = GLib.get_monotonic_time() / 1000
             const elapsed = now - startTime
             const progress = Math.min(1.0, elapsed / duration)
@@ -475,23 +475,19 @@ export default function AppLauncher(app) {
 
     window.connect("key-press-event", (self, event) => {
         const [, keyval] = event.get_keyval()
+        const state = event.get_state()[1]
+        const hasCtrl = (state & Gdk.ModifierType.CONTROL_MASK) !== 0
+        const isEntryFocused = searchEntry.has_focus
 
-        if (keyval === Gdk.KEY_Escape) { window.hide(); return true }
-
-        if (keyval === Gdk.KEY_Left || keyval === Gdk.KEY_h) {
-            if (activeIndex > 0) {
-                activeIndex--
-                renderCarousel()
+        if (keyval === Gdk.KEY_Escape) {
+            if (searchEntry.get_text() !== "") {
+                searchEntry.set_text("")
+                return true
             }
+            window.hide()
             return true
         }
-        if (keyval === Gdk.KEY_Right || keyval === Gdk.KEY_l) {
-            if (activeIndex < appList.length - 1) {
-                activeIndex++
-                renderCarousel()
-            }
-            return true
-        }
+
         if (keyval === Gdk.KEY_Return || keyval === Gdk.KEY_KP_Enter) {
             const activeApp = appList[activeIndex]
             if (activeApp) {
@@ -499,6 +495,59 @@ export default function AppLauncher(app) {
                 window.hide()
             }
             return true
+        }
+
+        // Arrow keys ALWAYS navigate the carousel (even while typing!)
+        if (keyval === Gdk.KEY_Left) {
+            if (activeIndex > 0) {
+                activeIndex--
+                renderCarousel()
+            }
+            return true
+        }
+        if (keyval === Gdk.KEY_Right) {
+            if (activeIndex < appList.length - 1) {
+                activeIndex++
+                renderCarousel()
+            }
+            return true
+        }
+        if (keyval === Gdk.KEY_Up) {
+            if (activeIndex > 0) {
+                activeIndex--
+                renderCarousel()
+            }
+            return true
+        }
+        if (keyval === Gdk.KEY_Down) {
+            if (activeIndex < appList.length - 1) {
+                activeIndex++
+                renderCarousel()
+            }
+            return true
+        }
+
+        // Ctrl + Vim keys (Ctrl+h, Ctrl+l, Ctrl+j, Ctrl+k) for keyboard navigation without conflicts
+        if (hasCtrl) {
+            if (keyval === Gdk.KEY_h || keyval === Gdk.KEY_k) {
+                if (activeIndex > 0) {
+                    activeIndex--
+                    renderCarousel()
+                }
+                return true
+            }
+            if (keyval === Gdk.KEY_l || keyval === Gdk.KEY_j) {
+                if (activeIndex < appList.length - 1) {
+                    activeIndex++
+                    renderCarousel()
+                }
+                return true
+            }
+        }
+
+        // If search entry lost focus, redirect alphanumeric keystrokes back to search
+        if (!isEntryFocused && !hasCtrl && keyval !== Gdk.KEY_Tab) {
+            searchEntry.grab_focus()
         }
 
         return false

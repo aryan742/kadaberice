@@ -148,7 +148,7 @@ export default function WallpaperCarousel(app) {
             return
         }
 
-        animId = GLib.timeout_add(GLib.PRIORITY_HIGH, 8, () => {
+        animId = GLib.timeout_add(GLib.PRIORITY_HIGH, 16, () => {
             const now = GLib.get_monotonic_time() / 1000
             const elapsed = now - startTime
             const progress = Math.min(1.0, elapsed / duration)
@@ -177,7 +177,17 @@ export default function WallpaperCarousel(app) {
             hexpand: true,
             vexpand: true
         }, "card-banner", "wallpaper-img-box")
-        setInlineStyle(banner, `* { background-image: url("${wpPath}"); min-width: 860px; min-height: 440px; }`)
+        setInlineStyle(banner, `
+            * {
+                background-image: url("${wpPath}");
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                min-width: 860px;
+                min-height: 440px;
+                border-radius: 16px;
+            }
+        `)
 
         // Inactive: thin slice showing edge of image
         const sliceBox = Widget(Gtk.Box, {
@@ -186,7 +196,17 @@ export default function WallpaperCarousel(app) {
             halign: Gtk.Align.CENTER,
             vexpand: true
         }, "side-slice", "wallpaper-img-box")
-        setInlineStyle(sliceBox, `* { background-image: url("${wpPath}"); min-width: 60px; min-height: 380px; }`)
+        setInlineStyle(sliceBox, `
+            * {
+                background-image: url("${wpPath}");
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                min-width: 60px;
+                min-height: 380px;
+                border-radius: 10px;
+            }
+        `)
 
         banner.show_all()
         sliceBox.show_all()
@@ -327,24 +347,27 @@ export default function WallpaperCarousel(app) {
     window.connect("key-press-event", (self, event) => {
         const [, keyval] = event.get_keyval()
         const state = event.get_state()[1]
+        const hasCtrl = (state & Gdk.ModifierType.CONTROL_MASK) !== 0
+        const isEntryFocused = searchEntry.has_focus
 
         if (keyval === Gdk.KEY_Escape) { window.hide(); return true }
 
-        if ((state & Gdk.ModifierType.CONTROL_MASK) !== 0) {
+        if (hasCtrl) {
             if (keyval === Gdk.KEY_1) { globalThis.showWidget("app-launcher");       return true }
             if (keyval === Gdk.KEY_2) { globalThis.showWidget("workspace-carousel"); return true }
             if (keyval === Gdk.KEY_3) { globalThis.showWidget("wallpaper-carousel"); return true }
         }
 
-        if (keyval === Gdk.KEY_Left || keyval === Gdk.KEY_h) {
+        // Arrow keys always navigate
+        if (keyval === Gdk.KEY_Left) {
             if (activeIndex > 0) { activeIndex--; renderCarousel() }
             return true
         }
-        if (keyval === Gdk.KEY_Right || keyval === Gdk.KEY_l) {
+        if (keyval === Gdk.KEY_Right) {
             if (activeIndex < wallpapers.length - 1) { activeIndex++; renderCarousel() }
             return true
         }
-        if (keyval === Gdk.KEY_Up || keyval === Gdk.KEY_k) {
+        if (keyval === Gdk.KEY_Up) {
             if (activeCategoryIndex > 0) {
                 activeCategoryIndex--
                 loadWallpapersForCategory(categories[activeCategoryIndex])
@@ -352,13 +375,41 @@ export default function WallpaperCarousel(app) {
             }
             return true
         }
-        if (keyval === Gdk.KEY_Down || keyval === Gdk.KEY_j) {
+        if (keyval === Gdk.KEY_Down) {
             if (activeCategoryIndex < categories.length - 1) {
                 activeCategoryIndex++
                 loadWallpapersForCategory(categories[activeCategoryIndex])
                 renderCategories(); renderCarousel(true)
             }
             return true
+        }
+
+        // Vim keys (h, l, j, k) only when search box is NOT focused, OR with Ctrl
+        if (!isEntryFocused || hasCtrl) {
+            if (keyval === Gdk.KEY_h) {
+                if (activeIndex > 0) { activeIndex--; renderCarousel() }
+                return true
+            }
+            if (keyval === Gdk.KEY_l) {
+                if (activeIndex < wallpapers.length - 1) { activeIndex++; renderCarousel() }
+                return true
+            }
+            if (keyval === Gdk.KEY_k) {
+                if (activeCategoryIndex > 0) {
+                    activeCategoryIndex--
+                    loadWallpapersForCategory(categories[activeCategoryIndex])
+                    renderCategories(); renderCarousel(true)
+                }
+                return true
+            }
+            if (keyval === Gdk.KEY_j) {
+                if (activeCategoryIndex < categories.length - 1) {
+                    activeCategoryIndex++
+                    loadWallpapersForCategory(categories[activeCategoryIndex])
+                    renderCategories(); renderCarousel(true)
+                }
+                return true
+            }
         }
         if (keyval === Gdk.KEY_Return || keyval === Gdk.KEY_KP_Enter) {
             const selectedWp = wallpapers[activeIndex]
