@@ -13,6 +13,7 @@ sleep 2
 
 # 1. Attempt standard plugin reload
 if hyprpm reload; then
+    hyprctl reload
     exit 0
 fi
 
@@ -23,6 +24,7 @@ notify-send -u low "Hyprland Plugins" "Hyprland version update detected. Rebuild
 sleep 3
 
 if hyprpm update && hyprpm reload; then
+    hyprctl reload
     notify-send -u normal "Hyprland Plugins" "Plugins rebuilt & loaded successfully!"
 else
     notify-send -u critical "Hyprland Plugins" "Plugins failed to load. Run 'hyprpm update' manually to inspect errors."
