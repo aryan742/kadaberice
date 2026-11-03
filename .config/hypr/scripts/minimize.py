@@ -92,13 +92,13 @@ def minimize_active():
         return
     
     ws_name = active.get("workspace", {}).get("name", "")
-    if ws_name.startswith("special:"):
+    if ws_name in ("minimized", "special:minimized"):
         return
 
     addr = active["address"]
     cls = active.get("class", "")
     title = active.get("title", "")
-    prev_ws = active.get("workspace", {}).get("id", 1)
+    current_ws_id = str(active.get("workspace", {}).get("id", 1))
 
     minimized = load_minimized()
     minimized = [w for w in minimized if w.get("address") != addr]
@@ -106,7 +106,7 @@ def minimize_active():
         "address": addr,
         "class": cls,
         "title": title,
-        "prev_ws": prev_ws
+        "prev_ws": current_ws_id
     })
     save_minimized(minimized)
 
@@ -114,28 +114,12 @@ def minimize_active():
     if active.get("fullscreen", 0) != 0:
         subprocess.run(["hyprctl", "eval", "hl.dispatch(hl.dsp.window.fullscreen(0))"], check=False, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
-    # Move active window to special:minimized
-    subprocess.run([
-        "hyprctl", "eval",
-        'hl.dispatch(hl.dsp.window.move({ workspace = "special:minimized", silent = true }))'
-    ], check=False, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-
-    # Transfer focus to another window on the current workspace or desktop
-    clients = run_hyprctl("clients") or []
-    other_windows = [
-        c for c in clients 
-        if c.get("address") != addr and not c.get("workspace", {}).get("name", "").startswith("special:")
-    ]
-    same_ws = [c for c in other_windows if c.get("workspace", {}).get("id") == prev_ws]
-    target_focus = (same_ws or other_windows)[-1] if (same_ws or other_windows) else None
-
-    if target_focus and target_focus.get("address"):
-        target_addr = target_focus["address"]
-        subprocess.run([
-            "hyprctl", "eval",
-            f'hl.dispatch(hl.dsp.focus({{ window = "address:{target_addr}" }}))'
-        ], check=False, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-
+    # Move active window to clean hidden workspace "minimized" and ensure current workspace remains active
+    lua_code = (
+        'hl.dispatch(hl.dsp.window.move({ workspace = "name:minimized", silent = true })) '
+        f'hl.dispatch(hl.dsp.focus({{ workspace = "{current_ws_id}" }}))'
+    )
+    subprocess.run(["hyprctl", "eval", lua_code], check=False, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     notify_waybar()
 
 def restore_window(target_addr=None):
@@ -158,7 +142,7 @@ def restore_window(target_addr=None):
     target_ws = str(active_ws.get("id", target.get("prev_ws", 1)) if active_ws else target.get("prev_ws", 1))
     addr = target["address"]
 
-    # Focus window, restore to current workspace, and focus
+    # Focus window on minimized workspace, move back to current workspace, and focus
     lua_code = (
         f'hl.dispatch(hl.dsp.focus({{ window = "address:{addr}" }})) '
         f'hl.dispatch(hl.dsp.window.move({{ workspace = "{target_ws}", silent = false }})) '
@@ -169,7 +153,7 @@ def restore_window(target_addr=None):
 
 def toggle():
     active = run_hyprctl("activewindow")
-    if active and active.get("address") and not active.get("workspace", {}).get("name", "").startswith("special:"):
+    if active and active.get("address") and active.get("workspace", {}).get("name", "") not in ("minimized", "special:minimized"):
         minimize_active()
     else:
         restore_window()
