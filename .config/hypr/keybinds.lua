@@ -8,7 +8,7 @@ local screenshot = "~/.config/hypr/scripts/screenshot.sh"
 local osd = "~/.config/hypr/scripts/osd_control.sh"
 
 -- ── Application Binds ────────────────────────────────────────────
-hl.bind(mainMod .. " + A",      hl.dsp.exec_cmd("antigravity"))
+hl.bind(mainMod .. " + A",      hl.dsp.exec_cmd("antigravity-ide"))
 hl.bind(mainMod .. " + Q",      hl.dsp.exec_cmd("kitty"))
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd("alacritty"))
 hl.bind(mainMod .. " + E",      hl.dsp.exec_cmd("thunar"))
